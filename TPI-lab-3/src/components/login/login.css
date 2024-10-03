@@ -1,0 +1,5 @@
+.login-button, .register-button {
+    background-color: rgb(0, 119, 255);
+    border-color: rgb(0, 119, 255);
+    color: white;
+}
