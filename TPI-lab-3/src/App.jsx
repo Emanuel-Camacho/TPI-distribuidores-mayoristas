@@ -17,23 +17,23 @@ const App = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const loginHandler = () => {
-  setIsLoggedIn(true);
+    setIsLoggedIn(true);
   };
 
   const router = createBrowserRouter([
     {
-        path: "/",
-        element: (
-          <Protected isSignedIn={isLoggedIn}>
-            <Dashboard />
-          </Protected>
-        ),
+      path: "/",
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <Dashboard />
+        </Protected>
+      ),
     },
     {
-      path: "/login" , element: <Login onLogin={loginHandler} />
+      path: "/login", element: <Login onLogin={loginHandler} />
     },
     {
-      path: "/register", element: <Register/>
+      path: "/register", element: <Register />
     },
     {
       path: "*", element: <NotFound />
