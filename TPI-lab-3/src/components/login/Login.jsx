@@ -78,6 +78,9 @@ const Login = () => {
         catch (error) {
             console.error(error);
         } */
+
+        onLogin();
+        navigate("/");
     };
 
 
