@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Col, Row } from "react-bootstrap";
 import ProductCard from "../productCard/ProductCard";
 import './Dashboard.css'
 const products = [
@@ -34,25 +36,38 @@ const products = [
         productPrice: 14000,
         productImage: "",
     },
-    
-];
-const Dashboard = () => {
 
+];
+const Dashboard = ({ onLogout }) => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate("/login");
+        onLogout();
+    };
 
     return (
         <>
-            <h2>Productos</h2>
+            <Row className="w-100">
+                <Col />
+                <Col className="d-flex justify-content-center">
+                    <h2 className="my-4">Mayorista Pepa</h2>
+                </Col>
+                <Col className="d-flex justify-content-end align-items-center me-3">
+                    <Button onClick={handleLogout}>Cerrar sesión</Button>
+                </Col>
+            </Row>
             <div className="card-list">
-            {products.map((product) => (
-                <ProductCard
-                    key={product.id}
-                    productName={product.productName}
-                    productBrand={product.productBrand}
-                    productDetail={product.productDetail}
-                    productPrice={product.productPrice}
-                    productImage={product.productImage}
-                />
-            ))}
+                {products.map((product) => (
+                    <ProductCard
+                        key={product.id}
+                        productName={product.productName}
+                        productBrand={product.productBrand}
+                        productDetail={product.productDetail}
+                        productPrice={product.productPrice}
+                        productImage={product.productImage}
+                    />
+                ))}
             </div>
         </>
     );
