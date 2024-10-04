@@ -13,9 +13,22 @@ import NotFound from "./components/notFound/NotFound";
 
 const App = () => {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const loginHandler = () => {
+  setIsLoggedIn(true);
+  };
+
   const router = createBrowserRouter([
     {
-      path: "/login", element: <Login onLogin={() => { }} />
+        path: "/",
+        element: (
+          <Protected>
+            <Dashboard />
+          </Protected>
+        ),
+    },
+    {
+      path: "/login", element: <Login onLogin={loginHandler} />
     },
     {
       path: "/register", element: <Register/>
@@ -33,4 +46,3 @@ const App = () => {
 };
 
 export default App;
-
