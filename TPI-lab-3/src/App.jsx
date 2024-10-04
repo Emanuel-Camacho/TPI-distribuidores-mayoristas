@@ -1,6 +1,7 @@
 
 // Libraries
 import React from "react";
+import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Helpers
 
@@ -8,7 +9,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register"; // autocompleta minuscula
 import NotFound from "./components/notFound/NotFound";
-
+import Protected from "./components/protected/Protected";
+import Dashboard from "./components/dashboard/Dashboard";
 // Stlyes
 
 const App = () => {
@@ -22,13 +24,13 @@ const App = () => {
     {
         path: "/",
         element: (
-          <Protected>
+          <Protected isSignedIn={isLoggedIn}>
             <Dashboard />
           </Protected>
         ),
     },
     {
-      path: "/login", element: <Login onLogin={loginHandler} />
+      path: "/login" , element: <Login onLogin={loginHandler} />
     },
     {
       path: "/register", element: <Register/>
