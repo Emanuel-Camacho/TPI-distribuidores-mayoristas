@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import ProductCard from "../productCard/ProductCard";
+import './Dashboard.css'
 const products = [
     {
         id: 1,
@@ -7,27 +8,54 @@ const products = [
         productBrand: "FaberCastell",
         productDetail: "... goma de borrar buena",
         productPrice: 100,
-        prductImage:
-            "https://images.cdn3.buscalibre.com/fit-in/360x360/61/8d/618d227e8967274cd9589a549adff52d.jpg",
+        productImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzh6i6yakNOKN9T_86brw655ptQoN2ii5Wyg&s",
     },
     {
         id: 2,
-        productName: "Goma de borrar2",
-        productBrand: "FaberCastell2",
-        productDetail: "2... goma de borrar buena",
-        productPrice: 102,
-        prductImage:
-            "https://images.cdn3.buscalibre.com/fit-in/360x360/61/8d/618d227e8967274cd9589a549adff52d.jpg",
+        productName: "Lapiz rojo",
+        productBrand: "FaberCastell",
+        productDetail: "... lapizardo",
+        productPrice: 10000,
+        productImage: "https://papelerialacomuna.com/2610-home_default/lapiz-rojo-chequeo-faber-castell.jpg",
     },
+    {
+        id: 3,
+        productName: "birome",
+        productBrand: "FaberCastell",
+        productDetail: "... lapizerarda",
+        productPrice: 15700,
+        productImage: "https://http2.mlstatic.com/D_NQ_NP_946208-MLA44173637060_112020-O.webp",
+    },
+    {
+        id: 1,
+        productName: "Liquid paper",
+        productBrand: "FaberCastell",
+        productDetail: "... el liqui",
+        productPrice: 14000,
+        productImage: "",
+    },
+    
 ];
 const Dashboard = () => {
+
 
     return (
         <>
             <h2>Productos</h2>
-            <p>info de cada producto!</p>
-
+            <div className="card-list">
+            {products.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    productName={product.productName}
+                    productBrand={product.productBrand}
+                    productDetail={product.productDetail}
+                    productPrice={product.productPrice}
+                    productImage={product.productImage}
+                />
+            ))}
+            </div>
         </>
     );
 };
+
 export default Dashboard;
