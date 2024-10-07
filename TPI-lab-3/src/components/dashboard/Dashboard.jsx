@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Col, Row } from "react-bootstrap";
 import ProductCard from "../productCard/ProductCard";
 import './Dashboard.css'
+import NavBar from "../nav-footer/nav";
 const products = [
     {
         id: 1,
@@ -38,25 +39,10 @@ const products = [
     },
 
 ];
-const Dashboard = ({ onLogout }) => {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        navigate("/login");
-        onLogout();
-    };
-
+const Dashboard = () => {
     return (
         <>
-            <Row className="w-100">
-                <Col />
-                <Col className="d-flex justify-content-center">
-                    <h2 className="my-4">Mayorista Pepa</h2>
-                </Col>
-                <Col className="d-flex justify-content-end align-items-center me-3">
-                    <Button onClick={handleLogout}>Cerrar sesión</Button>
-                </Col>
-            </Row>
+            <NavBar/>
             <div className="card-list">
                 {products.map((product) => (
                     <ProductCard
