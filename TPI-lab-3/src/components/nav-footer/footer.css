@@ -1,0 +1,11 @@
+.footer {
+    background-color: lightskyblue;
+}
+
+.border-custom {
+    border-bottom: 1px solid black;
+}
+
+.nav-item:hover{
+    text-decoration: underline;
+}
