@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import '../login/login.css'
 
-const Register = () => {
+const Register = ({ onRegister }) => {
     const [user, setUser] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -108,6 +108,8 @@ const Register = () => {
             return;
         }
 
+        onRegister();
+        navigate("/");
 
 
         /* try {
