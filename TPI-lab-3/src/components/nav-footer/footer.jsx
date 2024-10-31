@@ -3,7 +3,7 @@ import './footer.css'
 
 const Footer = () => {
     return (
-        <div className="footer w-100 fixed-bottom">
+        <div className="footer w-100 fixed-bottom overflow-hidden position-relative">
             <footer className="py-10 my-3" >
                 <ul className="nav justify-content-center border-custom pb-3 mb-3" >
                     <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">Inicio</a></li>
