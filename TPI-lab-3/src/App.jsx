@@ -43,7 +43,7 @@ const App = () => {
       path: "/login", element: <Login onLogin={loginHandler} />
     },
     {
-      path: "/register", element: <Register />
+      path: "/register", element: <Register onRegister={loginHandler}/>
     },
     {
       path: "*", element: <NotFound />

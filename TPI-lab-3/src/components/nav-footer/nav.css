@@ -1,0 +1,39 @@
+.navbar {
+    background-color: lightskyblue;
+}
+
+.carrito {
+    background-color: transparent;
+    border-color: lightgreen;
+    margin-left: 5px; 
+}
+
+.carrito:hover {
+    background-color: transparent;
+    border-color: red;
+}
+
+.carrito:active {
+    background-color: transparent !important;
+    border-color: red !important;
+}
+
+.carrito img {
+    width: 30px;
+    height: 30px;
+}
+
+.barra-busqueda {
+    max-width: 600px;  
+    width: 1500px; 
+    margin-left: 0;
+}
+
+.container {
+    max-width: 2000px; 
+    margin: 10px auto;
+}
+
+.nombre-logo {
+    flex: 1;
+}

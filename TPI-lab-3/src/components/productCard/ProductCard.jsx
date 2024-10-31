@@ -1,4 +1,5 @@
 import { Card, Button } from "react-bootstrap";
+
 import { useNavigate } from "react-router-dom";
 import './productCard.css';
 
@@ -13,7 +14,6 @@ const ProductCard = ({ productName = "Unnamed Product", productBrand = "Unknown 
 
     return (
         <Card className="card-container" key={id}>
-            
             <Card.Img
                 className="card-image"
                 src={productImage !== "" ? productImage : placeholderImage}
@@ -24,9 +24,11 @@ const ProductCard = ({ productName = "Unnamed Product", productBrand = "Unknown 
                 <Card.Title>${productPrice}</Card.Title>
                 <Card.Text>{productBrand}</Card.Text>
                 <Button variant="success">Añadir</Button> {/* Botón de Bootstrap */}
+
                 <Button onClick={() => handleCardClick(id)} >Ver producto</Button>
             </Card.Body>
         </Card>
     );
 };
+
 export default ProductCard;
