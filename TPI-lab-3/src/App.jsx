@@ -1,6 +1,7 @@
 
 // Libraries
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Helpers
@@ -10,7 +11,8 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register"; // autocompleta minuscula
 import NotFound from "./components/notFound/NotFound";
 import Protected from "./components/protected/Protected";
-import Dashboard from "./components/dashboard/Dashboard";
+import {Dashboard} from "./components/dashboard/Dashboard";
+import SingleProduct from "./components/singleProduct/SingleProduct";
 // Stlyes
 
 const App = () => {
@@ -29,6 +31,14 @@ const App = () => {
         </Protected>
       ),
     },
+    {
+      path: "/product/:id",
+      element: (
+          <Protected isSignedIn={isLoggedIn}>
+              <SingleProduct />
+          </Protected>
+      ),
+  },
     {
       path: "/login", element: <Login onLogin={loginHandler} />
     },

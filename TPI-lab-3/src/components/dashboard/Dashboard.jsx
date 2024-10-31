@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Button, Col, Row } from "react-bootstrap";
 import ProductCard from "../productCard/ProductCard";
 import './Dashboard.css'
@@ -38,12 +39,12 @@ const products = [
     },
 
 ];
-const Dashboard = ({ onLogout }) => {
+const Dashboard = () => {
+
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        navigate("/login");
-        onLogout();
+    const handleCardClick = (productId) => {
+        navigate(`/product/${productId}`);
     };
 
     return (
@@ -61,11 +62,13 @@ const Dashboard = ({ onLogout }) => {
                 {products.map((product) => (
                     <ProductCard
                         key={product.id}
+                        id={product.id}
                         productName={product.productName}
                         productBrand={product.productBrand}
                         productDetail={product.productDetail}
                         productPrice={product.productPrice}
                         productImage={product.productImage}
+                        onClick={() => handleCardClick(product.id)}
                     />
                 ))}
             </div>
@@ -73,4 +76,4 @@ const Dashboard = ({ onLogout }) => {
     );
 };
 
-export default Dashboard;
+export {Dashboard, products};
