@@ -1,4 +1,3 @@
-
 // Libraries
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,6 +12,7 @@ import NotFound from "./components/notFound/NotFound";
 import Protected from "./components/protected/Protected";
 import {Dashboard} from "./components/dashboard/Dashboard";
 import SingleProduct from "./components/singleProduct/SingleProduct";
+import Cart from "./components/cart/Cart";
 // Stlyes
 
 const App = () => {
@@ -38,7 +38,10 @@ const App = () => {
               <SingleProduct />
           </Protected>
       ),
-  },
+    },
+    {
+      path: "/cart", element: <Cart/>
+    },
     {
       path: "/login", element: <Login onLogin={loginHandler} />
     },

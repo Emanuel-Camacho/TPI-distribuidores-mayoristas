@@ -8,6 +8,12 @@ const NavBar = ({ onLogout }) => {
         navigate("/login");
         onLogout();
     };
+    const handlerCart = () => {
+        navigate ('/cart');
+    }
+    const handlerDashboard = () => {
+        navigate ('/');
+    }
 return (
 <Navbar expand="lg" className="navbar w-100">
     <Container fluid className="container">
@@ -26,12 +32,12 @@ return (
                 />
                 <Button variant="btn btn-light">🔍</Button>
                 </Form>
-                <Button className="carrito"><img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Carrito"/></Button>
+                <Button className="carrito" onClick={handlerCart}><img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Carrito"/></Button>
                 <Button className="d-flex align-items-center ms-auto" onClick={handleLogout} >Cerrar sesión</Button>
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <Nav className="flex-grow-1">
-                <Nav.Link href="#action1">Inicio</Nav.Link>
+                <Nav.Link onClick={handlerDashboard}>Inicio</Nav.Link>
                 <Nav.Link href="#action2">Mis compras</Nav.Link>
                 <NavDropdown title="Filtro" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">Ropa</NavDropdown.Item>
