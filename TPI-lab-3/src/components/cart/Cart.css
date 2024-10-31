@@ -1,0 +1,15 @@
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+}
+

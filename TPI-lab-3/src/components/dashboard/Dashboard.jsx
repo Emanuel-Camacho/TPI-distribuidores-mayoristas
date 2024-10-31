@@ -6,6 +6,8 @@ import ProductCard from "../productCard/ProductCard";
 import './Dashboard.css'
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
+
+const listCart = []
 const products = [
     {
         id: 1,
@@ -32,7 +34,7 @@ const products = [
         productImage: "https://http2.mlstatic.com/D_NQ_NP_946208-MLA44173637060_112020-O.webp",
     },
     {
-        id: 1,
+        id: 4,
         productName: "Liquid paper",
         productBrand: "FaberCastell",
         productDetail: "... el liqui",
@@ -49,7 +51,6 @@ const Dashboard = () => {
     const handleCardClick = (productId) => {
         navigate(`/product/${productId}`);
     };
-  
     return (
         <>
             <NavBar/>
@@ -72,4 +73,4 @@ const Dashboard = () => {
     );
 };
 
-export {Dashboard, products};
+export {Dashboard, products, listCart};
