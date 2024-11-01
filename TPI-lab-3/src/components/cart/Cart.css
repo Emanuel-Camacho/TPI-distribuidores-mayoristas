@@ -1,4 +1,5 @@
-.table td, .table th {
+.table td,
+.table th {
     vertical-align: middle;
 }
 
@@ -12,4 +13,3 @@
     border: none;
     border-radius: 8px;
 }
-
