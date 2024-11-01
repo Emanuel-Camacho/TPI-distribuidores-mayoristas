@@ -1,0 +1,43 @@
+.modal-header-custom {
+    background-color: #474747;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    position: relative;
+}
+
+
+.modal-body-custom {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.modal-footer-custom {
+    background-color: #000;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-custom {
+    background-color: #474747;
+    color: #fff;
+    border: 2px solid #606060;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.confirm-button {
+    background-color: #ffc107;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    color: #000;
+    font-weight: bold;
+}
+
+.cancel-button {
+    color: #cfcfcf;
+}
