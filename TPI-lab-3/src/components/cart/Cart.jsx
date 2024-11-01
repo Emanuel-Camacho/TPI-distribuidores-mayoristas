@@ -84,13 +84,16 @@ const Cart = () => {
                                             </InputGroup>
                                         </td>
                                         <td><strong>${(product.productPrice * quantities[product.id]).toFixed(2)}</strong></td>
+                                        <td>
+                                            <Button variant="danger" onClick={() => handleRemoveItem(product.id)}>🗑️</Button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </Table>
                     </Col>
 
-                    
+                    {/* Cart Totals */}
                     <Col md={4}>
                         <Card className="p-6 p-md-12 bg-black text-white">
                             <Card.Body>
