@@ -2,20 +2,27 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Table, Button, Form, InputGroup, FormControl, Card } from 'react-bootstrap';
 import './Cart.css';
 import { useCart } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
+import PaymentMethod from '../paymentMethod/PaymentMethod';
 
 
 const Cart = () => {
     const { cartItems } = useCart();
     const shippingCost = 5000;
+    const navigate = useNavigate();
 
     const [quantities, setQuantities] = useState(
         cartItems.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
     );
 
     const totalPrice = cartItems.reduce((acc, product) => acc + product.productPrice * quantities[product.id], 0);
-    
+
+    const handlePymentMethod = () => {
+        navigate("/paymentmethod");
+    };
+
     const handleQuantityChange = (productId, type) => {
         setQuantities((prevQuantities) => ({
             ...prevQuantities,
@@ -27,7 +34,7 @@ const Cart = () => {
 
     return (
         <>
-            <NavBar/>
+            <NavBar />
             <Container className="my-5">
                 <h2>Tu carrito</h2>
                 <Row>
@@ -99,13 +106,13 @@ const Cart = () => {
                                         <strong>${(totalPrice + shippingCost).toFixed(2)}</strong>
                                     </Col>
                                 </Row>
-                                <Button variant="warning" className="w-100 mt-5">Comprar</Button>
+                                <Button variant="warning" className="w-100 mt-5" onClick={handlePymentMethod}>Comprar</Button>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
             </Container>
-            <Footer/>
+            <Footer />
         </>
     );
 };
