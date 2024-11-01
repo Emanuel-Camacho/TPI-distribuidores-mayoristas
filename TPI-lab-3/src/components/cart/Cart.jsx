@@ -90,7 +90,7 @@ const Cart = () => {
                         </Table>
                     </Col>
 
-                    {/* Cart Totals */}
+                    
                     <Col md={4}>
                         <Card className="p-6 p-md-12 bg-black text-white">
                             <Card.Body>
