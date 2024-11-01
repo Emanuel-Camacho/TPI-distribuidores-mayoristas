@@ -56,7 +56,7 @@ const Login = ({ onLogin }) => {
             return;
         }
 
-        try {
+        /* try {
             const response = await fetch("http://localhost:8000/login", {
                 method: "POST",
                 headers: {
@@ -75,19 +75,21 @@ const Login = ({ onLogin }) => {
             localStorage.setItem("refreshToken", data.refreshToken);
 
             if (data.userType === "client") {
-                navigate("/");
+                
             } else if (data.userType === "seller") {
                 navigate("/admin");
             } else if (data.userType === "sysAdmin") {
                 navigate("/sysadmin");
             }
 
-            onLogin();
+            
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
             alert(error.message);
-        }
-    };
+        }*/
+    onLogin();
+    navigate("/");
+    }; 
     
     const handleRegisterRedirect = () => {
         navigate('/register'); 

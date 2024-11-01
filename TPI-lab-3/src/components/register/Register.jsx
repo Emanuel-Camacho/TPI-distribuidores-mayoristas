@@ -103,7 +103,7 @@ const Register = ({ onRegister }) => {
             return;
         }
 
-        try {
+        /* try {
             const response = await fetch('http://localhost:8000/register', {
                 method: 'POST',
                 headers: {
@@ -117,12 +117,12 @@ const Register = ({ onRegister }) => {
             if (!response.ok) {
                 throw new Error(data.message || 'Error en el registro');
             }
-
-            onRegister();
-            navigate("/"); 
-        } catch (error) {
+            catch (error) {
             alert(error.message);
-        }
+            }   
+            } */
+        onRegister();
+        navigate("/"); 
     };
 
     const handleLoginRedirect = () => {

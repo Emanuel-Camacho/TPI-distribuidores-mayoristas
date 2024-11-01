@@ -34,7 +34,7 @@ const App = () => {
         </Protected>
       ),
     },
-    {
+    /* {
       path: "/admin",
       element: (
         <Protected isSignedIn={isLoggedIn}>
@@ -48,8 +48,8 @@ const App = () => {
         <Protected isSignedIn={isLoggedIn}>
           <SysAdmin />
         </Protected>
-      ),
-    },
+      ), 
+    },*/
     {
       path: "/product/:id",
       element: (
