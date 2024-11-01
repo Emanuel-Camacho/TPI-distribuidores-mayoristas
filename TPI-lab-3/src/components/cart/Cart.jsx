@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Table, Button, Form, InputGroup, FormControl, Card } from 'react-bootstrap';
 import './Cart.css';
-import { products } from '../dashboard/Dashboard';
-import { useParams } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
-import { listCart } from '../dashboard/Dashboard';
+
 
 const Cart = () => {
-    const { id } = useParams();
-    //const product = listCart.find((prod) => prod.id === Number(id));
+    const { cartItems } = useCart();
     const shippingCost = 5000;
 
-    // Inicializa un estado de cantidades con el id de cada producto como clave y una cantidad inicial de 1
     const [quantities, setQuantities] = useState(
-        listCart.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
+        cartItems.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
     );
 
-    // Calcular el precio total sumando los subtotales de cada producto
-    const totalPrice = listCart.reduce((acc, product) => acc + product.productPrice * quantities[product.id], 0);
-
-    // Función para manejar el cambio de cantidad solo para el producto actual
+    const totalPrice = cartItems.reduce((acc, product) => acc + product.productPrice * quantities[product.id], 0);
+    
     const handleQuantityChange = (productId, type) => {
         setQuantities((prevQuantities) => ({
             ...prevQuantities,
@@ -48,7 +43,7 @@ const Cart = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {listCart.map((product) => (
+                                {cartItems.map((product) => (
                                     <tr key={product.id}>
                                         <td>
                                             <Row>

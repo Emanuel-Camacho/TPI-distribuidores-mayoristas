@@ -6,8 +6,6 @@ import ProductCard from "../productCard/ProductCard";
 import './Dashboard.css'
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
-
-const listCart = []
 const products = [
     {
         id: 1,
@@ -73,4 +71,4 @@ const Dashboard = () => {
     );
 };
 
-export {Dashboard, products, listCart};
+export {Dashboard, products};
