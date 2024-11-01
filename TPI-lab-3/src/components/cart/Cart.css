@@ -13,3 +13,14 @@
     border: none;
     border-radius: 8px;
 }
+
+.trash-button svg {
+    width: 23px; 
+    height: 23px;
+    color: gray;
+    transition: color 0.2s ease;
+}
+
+.trash-button svg:hover {
+    color: red;
+}
