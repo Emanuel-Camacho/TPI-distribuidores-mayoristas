@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Table, Button, Form, InputGroup, FormControl, Card } from 'react-bootstrap';
+import { Container, Row, Col, Table, Button, FormControl, InputGroup, Card } from 'react-bootstrap';
 import './Cart.css';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
-import PaymentMethod from '../paymentMethod/PaymentMethod';
-
 
 const Cart = () => {
     const { cartItems } = useCart();
@@ -19,8 +17,13 @@ const Cart = () => {
 
     const totalPrice = cartItems.reduce((acc, product) => acc + product.productPrice * quantities[product.id], 0);
 
-    const handlePymentMethod = () => {
-        navigate("/paymentmethod");
+    // Nueva función para verificar el carrito y navegar
+    const handlePaymentMethod = () => {
+        if (cartItems.length === 0) {
+            alert("Tu carrito está vacío. Por favor, añade productos antes de proceder a la compra.");
+        } else {
+            navigate("/paymentmethod");
+        }
     };
 
     const handleQuantityChange = (productId, type) => {
@@ -40,7 +43,7 @@ const Cart = () => {
                 <Row>
                     {/* Tabla del carrito */}
                     <Col md={8}>
-                        <Table responsive  >
+                        <Table responsive>
                             <thead>
                                 <tr>
                                     <th>Descripcion</th>
@@ -89,7 +92,7 @@ const Cart = () => {
 
                     {/* Cart Totals */}
                     <Col md={4}>
-                        <Card className="p-6 p-md-12  bg-black text-white">
+                        <Card className="p-6 p-md-12 bg-black text-white">
                             <Card.Body>
                                 <Card.Title>Total carrito</Card.Title>
                                 <Row className="my-3">
@@ -106,7 +109,7 @@ const Cart = () => {
                                         <strong>${(totalPrice + shippingCost).toFixed(2)}</strong>
                                     </Col>
                                 </Row>
-                                <Button variant="warning" className="w-100 mt-5" onClick={handlePymentMethod}>Comprar</Button>
+                                <Button variant="warning" className="w-100 mt-5" onClick={handlePaymentMethod}>Comprar</Button>
                             </Card.Body>
                         </Card>
                     </Col>
