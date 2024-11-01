@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
-import { Button, Card, Col, Form, FormGroup, Row } from
-    "react-bootstrap";
+import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import './login.css'
@@ -57,35 +56,41 @@ const Login = ({ onLogin }) => {
             return;
         }
 
-        /* try {
-            const res = await fetch("http://localhost:5268/api/Authentication",
-                {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+        try {
+            const response = await fetch("http://localhost:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-            if (!res.ok) {
-                throw res;
+            if (!response.ok) {
+                throw new Error("Usuario o contraseña incorrecta");
             }
 
-            const data = await res.text();
-            localStorage.setItem("bookchampions-token", data);
-            navigate("/");
+            const data = await response.json();
+            console.log("Tipo de usuario:", data.userType);
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+
+            if (data.userType === "client") {
+                navigate("/");
+            } else if (data.userType === "seller") {
+                navigate("/admin");
+            } else if (data.userType === "sysAdmin") {
+                navigate("/sysadmin");
+            }
+
+            onLogin();
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+            alert(error.message);
         }
-        catch (error) {
-            console.error(error);
-        } */
-
-        onLogin();
-        navigate("/");
     };
-
-
+    
     const handleRegisterRedirect = () => {
-        navigate('/register'); // Redirige a la ruta de registro
+        navigate('/register'); 
     }
 
     return (

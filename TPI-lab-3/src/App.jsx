@@ -14,6 +14,8 @@ import { Dashboard } from "./components/dashboard/Dashboard";
 import SingleProduct from "./components/singleProduct/SingleProduct";
 import Cart from "./components/cart/Cart";
 import PaymentMethod from "./components/paymentMethod/PaymentMethod";
+import Admin from "./components/admin/Admin";
+import SysAdmin from "./components/sysadmin/SysAdmin";
 // Stlyes
 
 const App = () => {
@@ -29,6 +31,22 @@ const App = () => {
       element: (
         <Protected isSignedIn={isLoggedIn}>
           <Dashboard />
+        </Protected>
+      ),
+    },
+    {
+      path: "/admin",
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <Admin />
+        </Protected>
+      ),
+    },
+    {
+      path: "/sysadmin",
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <SysAdmin />
         </Protected>
       ),
     },
