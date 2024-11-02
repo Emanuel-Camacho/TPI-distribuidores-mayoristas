@@ -34,7 +34,7 @@ const App = () => {
         </Protected>
       ),
     },
-    /* {
+    {
       path: "/admin",
       element: (
         <Protected isSignedIn={isLoggedIn}>
@@ -42,7 +42,7 @@ const App = () => {
         </Protected>
       ),
     },
-    {
+    /*{
       path: "/sysadmin",
       element: (
         <Protected isSignedIn={isLoggedIn}>
@@ -58,11 +58,29 @@ const App = () => {
         </Protected>
       ),
     },
+    /* {
+      path: "nose que poner aca",
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <EditProduct />
+        </Protected>
+      ),
+    }, */
     {
-      path: "/cart", element: <Cart />
+      path: "/cart", 
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <Cart />
+        </Protected>
+      ),
     },
     {
-      path: "/paymentmethod", element: <PaymentMethod />
+      path: "/paymentmethod", 
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <PaymentMethod />
+        </Protected>
+      ),
     },
     {
       path: "/login", element: <Login onLogin={loginHandler} />
