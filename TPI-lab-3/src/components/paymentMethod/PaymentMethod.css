@@ -1,0 +1,17 @@
+.cash-button {
+    background-color: #4cb24f;
+    color: #ffffff;
+}
+
+.cash-button:hover {
+    background-color: #317634;
+}
+
+.debit-card-button {
+    background-color: #2834b5;
+    color: #ffffff;
+}
+
+.debit-card-button:hover {
+    background-color: #1e278d;
+}
