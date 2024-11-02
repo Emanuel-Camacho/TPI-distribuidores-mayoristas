@@ -1,37 +1,33 @@
 import { useRef, useState } from "react";
-import { Button, Card, Col, Form, FormGroup, Row } from
-    "react-bootstrap";
+import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import '../register/Register.css'
 /* import '../login/login.css' */
 
 const Register = ({ onRegister }) => {
-    const [user, setUser] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
     const [errors, setErrors] = useState({
-        user: false,
+        username: false,
         email: false,
         password: false,
         passwordRepeat: false,
     });
 
-    const userRef = useRef(null);
+    const usernameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const passwordRepeatRef = useRef(null);
-    // referencian los inputs directamente
-
     const navigate = useNavigate();
-    // redirecciona al usuario a otras rutas
 
-    const handleChangeUser = (event) => {
-        setUser(event.target.value);
+    const handleChangeUsername = (event) => {
+        setUsername(event.target.value);
         setErrors(prevErrors => ({
             ...prevErrors,
-            user: event.target.value.length === 0
+            username: event.target.value.length === 0
         }));
     };
 
@@ -59,13 +55,13 @@ const Register = ({ onRegister }) => {
         }));
     };
 
-    const handleLogin = async () => {
-        if (userRef.current.value.length === 0) {
+    const handleRegister = async () => {
+        if (usernameRef.current.value.length === 0) {
             alert("¡Usuario vacío!");
-            userRef.current.focus();
+            usernameRef.current.focus();
             setErrors(prevErrors => ({
                 ...prevErrors,
-                user: true
+                username: true
             }));
             return;
         }
@@ -91,15 +87,14 @@ const Register = ({ onRegister }) => {
         }
 
         if (passwordRepeat.length === 0) {
-            alert("¡Password vacío!");
+            alert("¡Repite la contraseña!");
             passwordRepeatRef.current.focus();
             setErrors(prevErrors => ({
                 ...prevErrors,
                 passwordRepeat: true
             }));
             return;
-        }
-        else if (password !== passwordRepeat) {
+        } else if (password !== passwordRepeat) {
             alert("¡Las contraseñas no coinciden!");
             passwordRepeatRef.current.focus();
             setErrors(prevErrors => ({
@@ -109,36 +104,31 @@ const Register = ({ onRegister }) => {
             return;
         }
 
-        onRegister();
-        navigate("/");
-
-
         /* try {
-            const res = await fetch("http://localhost:5268/api/Authentication",
-                {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+            const response = await fetch('http://localhost:8000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+            });
 
-            if (!res.ok) {
-                throw res;
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Error en el registro');
             }
-
-            const data = await res.text();
-            localStorage.setItem("bookchampions-token", data);
-            navigate("/");
-        }
-        catch (error) {
-            console.error(error);
-        } */
+            catch (error) {
+            alert(error.message);
+            }   
+            } */
+        onRegister();
+        navigate("/"); 
     };
 
     const handleLoginRedirect = () => {
         navigate('/login');
-    }
+    };
 
     return (
         <Row className="align-items-center min-vh-100 mx-0">
@@ -224,6 +214,8 @@ const Register = ({ onRegister }) => {
             </Col>
 
         </Row>
+
     );
 };
+
 export default Register;
