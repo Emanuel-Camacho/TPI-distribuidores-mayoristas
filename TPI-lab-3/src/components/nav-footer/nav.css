@@ -4,13 +4,20 @@
 
 .carrito {
     background-color: transparent;
-    border-color: lightgreen;
-    margin-left: 5px; 
+    color: black;
+    border: 1px solid black;
+    margin-left: 12px;
+    height: 45px; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding: 13px;
 }
 
 .carrito:hover {
     background-color: transparent;
     border-color: red;
+    color: black;
 }
 
 .carrito:active {
@@ -18,15 +25,43 @@
     border-color: red !important;
 }
 
-.carrito img {
+.carrito svg {
     width: 30px;
     height: 30px;
 }
+
+
 
 .barra-busqueda {
     max-width: 600px;  
     width: 1500px; 
     margin-left: 0;
+}
+.barra-busqueda .form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding: 12px;
+    transition: background-color 0.3s ease;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.search-button svg {
+    width: 20px; 
+    height: 20px;
+}
+
+.search-button:hover {
+    background-color: #e0e0e0; 
 }
 
 .container {
