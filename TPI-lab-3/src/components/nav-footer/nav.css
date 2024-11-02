@@ -72,3 +72,7 @@
 .nombre-logo {
     flex: 1;
 }
+
+.logo-img {
+    width: 130px;
+}

@@ -9,15 +9,17 @@ const NavBar = ({ onLogout }) => {
         onLogout();
     };
     const handlerCart = () => {
-        navigate ('/cart');
+        navigate('/cart');
     }
     const handlerDashboard = () => {
-        navigate ('/');
+        navigate('/');
     }
     return (
         <Navbar expand="lg" className="navbar w-100">
             <Container fluid className="container">
-                <Navbar.Brand href="#" className="nombre-logo" >Todo al Por Mayor</Navbar.Brand>
+                <Navbar.Brand href="#" className="nombre-logo" >
+                    <img src="https://media.discordapp.net/attachments/1230880736777736363/1302353991325188189/images-removebg-preview.png?ex=6727cf2c&is=67267dac&hm=42099f75f764b518138e4245d4d88aa0ea65ef3602547b705179b6b9ccb0915b&=&format=webp&quality=lossless" alt="logo" className="logo-img mb-2" />
+                    Todo al Por Mayor</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <div className="d-flex flex-column w-100">
