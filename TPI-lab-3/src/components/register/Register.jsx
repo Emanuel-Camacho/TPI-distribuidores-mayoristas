@@ -145,12 +145,12 @@ const Register = ({ onRegister }) => {
                             <FormGroup className="mb-4">
                                 <Form.Control
                                     className="input"
-                                    ref={userRef}
-                                    value={user}
-                                    onChange={handleChangeUser}
+                                    ref={usernameRef}
+                                    value={username}
+                                    onChange={handleChangeUsername}
                                     type="text"
                                     placeholder="Ingresar Usuario" />
-                                {errors.user &&
+                                {errors.username &&
                                     <p className="text-danger">El usuario no debe ser vacío</p>
                                 }
                             </FormGroup>
@@ -195,7 +195,7 @@ const Register = ({ onRegister }) => {
                                     <p className="text-danger">Las contraseñas deben coincidir</p>}
                             </FormGroup>
                             <Button className="w-100 register-button mb-3" variant="secondary"
-                                onClick={handleLogin}
+                                onClick={handleRegister}
                                 type="button">
                                 Registrarse
                             </Button>
