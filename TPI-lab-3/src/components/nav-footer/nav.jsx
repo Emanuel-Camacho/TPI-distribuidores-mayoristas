@@ -48,10 +48,10 @@ const NavBar = ({ onLogout }) => {
                                 <Nav.Link onClick={handlerDashboard}>Inicio</Nav.Link>
                                 <Nav.Link href="#action2">Mis compras</Nav.Link>
                                 <NavDropdown title="Filtro" id="navbarScrollingDropdown">
-                                    <NavDropdown.Item href="#action3">Ropa</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action4">Libreria</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action3">Bebida</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action4">Snacks</NavDropdown.Item>
                                     {/* <NavDropdown.Divider /> */}
-                                    <NavDropdown.Item href="#action5">Comida</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action5">Dulces</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
 

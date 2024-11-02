@@ -65,7 +65,7 @@ const Register = ({ onRegister }) => {
             }));
             return;
         }
-
+        
         if (emailRef.current.value.length === 0) {
             alert("¡Email vacío!");
             emailRef.current.focus();
@@ -131,10 +131,10 @@ const Register = ({ onRegister }) => {
     };
 
     return (
-        <Row className="align-items-center min-vh-100 mx-0">
+        <Row className="align-items-center min-vh-100 mx-0 w-50">
             <Col xs={12} md={5} className="text-center">
                 <a href="/">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1THseam-yBpdGJYlt60zc_zFR-vlRSHuiRw&s" alt="logo" className="logo-img mb-2" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1THseam-yBpdGJYlt60zc_zFR-vlRSHuiRw&s" alt="logo" className="logo-img mb-2 w-50" />
                 </a>
             </Col>
             <Col xs={12} md={7} className="mx-auto">
@@ -209,12 +209,9 @@ const Register = ({ onRegister }) => {
                             </p>
                         </Col>
                     </Row>
-
                 </Card>
             </Col>
-
         </Row>
-
     );
 };
 
