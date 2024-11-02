@@ -187,10 +187,10 @@ const Dashboard = () => {
     const handleCardClick = (productId) => {
         navigate(`/product/${productId}`);
     };
-
     return (
         <>
-            <NavBar />
+            <NavBar/>
+            <button onClick={handleAdmin}>Ir a la pagina admin</button>
             <div className="card-list">
                 {products.map((product) => (
                     <ProductCard
