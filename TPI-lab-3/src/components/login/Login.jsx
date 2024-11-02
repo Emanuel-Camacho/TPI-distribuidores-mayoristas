@@ -96,52 +96,57 @@ const Login = ({ onLogin }) => {
     }
 
     return (
-        <>
-            <Card className="mt-5 mx-3 p-3 px-5 shadow">
-                <Card.Body>
-                    <Form>
-                        <FormGroup className="mb-4">
-                            <Form.Control
-                                ref={emailRef}
-                                value={email}
-                                onChange={handleChangeEmail}
-                                type="email"
-                                placeholder="Ingresar email" />
-                            {errors.email &&
-                                <p className="text-danger">El email no debe ser vacío</p>
-                            }
-                        </FormGroup>
-                        <FormGroup className="mb-4">
-                            <Form.Control
-                                ref={passwordRef}
-                                value={password}
-                                onChange={handleChangePassword}
-                                type="password"
-                                required
-                                placeholder="Ingresar contraseña"
-                            />
-                            {errors.password &&
-                                <p className="text-danger">El password no debe ser vacío</p>}
-                        </FormGroup>
-                    </Form>
-                    <Row>
-                        <Col />
-                        <Col md={8} className="d-flex justify-content-end">
-                            <Button className="login-button" variant="secondary"
+        <Row className="align-items-center min-vh-100 mx-0">
+            <Col xs={12} md={5} className="text-center">
+                <a href="/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1THseam-yBpdGJYlt60zc_zFR-vlRSHuiRw&s" alt="logo" className="logo-img mb-2" />
+                </a>
+            </Col>
+            <Col xs={12} md={7} className="mx-auto">
+                <Card className="p-4 no-shadow">
+                    <Card.Body>
+                        <Form>
+                            <FormGroup className="mb-4">
+                                <Form.Control
+                                    className="input"
+                                    ref={emailRef}
+                                    value={email}
+                                    onChange={handleChangeEmail}
+                                    type="email"
+                                    placeholder="Usuario"
+                                />
+                                {errors.email && (
+                                    <p className="text-danger">El email no debe ser vacío</p>
+                                )}
+                            </FormGroup>
+                            <FormGroup className="mb-4">
+                                <Form.Control
+                                    className="input"
+                                    ref={passwordRef}
+                                    value={password}
+                                    onChange={handleChangePassword}
+                                    type="password"
+                                    placeholder="Contraseña"
+                                />
+                                {errors.password && (
+                                    <p className="text-danger">El password no debe ser vacío</p>
+                                )}
+                            </FormGroup>
+                            <Button
+                                className="w-100 btn-login mb-3"
                                 onClick={handleLogin}
-                                type="button">
-                                Iniciar sesión
+                                variant="primary"
+                            >
+                                Ingresar
                             </Button>
-                        </Col>
-                    </Row>
-                </Card.Body>
-            </Card>
-            <Row className="justify-content-end mt-3"> {/* no podemos alinear a la derecha */}
-                <Col md="auto" className="d-flex">
-                    <p className="mb-0">¿No tienes cuenta?<a onClick={handleRegisterRedirect} href="#">Regístrate</a></p>
-                </Col>
-            </Row>
-        </>
+                        </Form>
+                        <p className="text-center">
+                            ¿No tienes cuenta? <a onClick={handleRegisterRedirect} href="#">Registrarse</a>
+                        </p>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row>
     );
 };
 export default Login;
