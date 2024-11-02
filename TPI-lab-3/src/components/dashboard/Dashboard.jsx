@@ -6,6 +6,7 @@ import ProductCard from "../productCard/ProductCard";
 import './Dashboard.css'
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
+
 const products = [
     // Bebidas
     {
@@ -187,6 +188,11 @@ const Dashboard = () => {
     const handleCardClick = (productId) => {
         navigate(`/product/${productId}`);
     };
+
+    const handleAdmin = () => {
+        navigate('/admin');
+    }
+
     return (
         <>
             <NavBar/>
