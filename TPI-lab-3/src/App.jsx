@@ -16,6 +16,7 @@ import Cart from "./components/cart/Cart";
 import PaymentMethod from "./components/paymentMethod/PaymentMethod";
 import Admin from "./components/admin/Admin";
 import SysAdmin from "./components/sysadmin/SysAdmin";
+import EditProduct from "./components/admin/EditProducts";
 // Stlyes
 
 const App = () => {
@@ -58,14 +59,14 @@ const App = () => {
         </Protected>
       ),
     },
-    /* {
-      path: "nose que poner aca",
+    {
+      path: "/edit/:id",
       element: (
         <Protected isSignedIn={isLoggedIn}>
           <EditProduct />
         </Protected>
       ),
-    }, */
+    },
     {
       path: "/cart", 
       element: (

@@ -4,14 +4,14 @@ import { products } from "../dashboard/Dashboard";
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
 import './Admin.css'
-import SingleProduct from "./EditProducts";
+import EditProduct from "./EditProducts";
 
 const Admin = () => {
     const navigate = useNavigate();
     const placeholderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmNILEZppKJCs1LHgBaUGbbFzQJsv6b5bt-w&s";
 
     const handleCardClick = (productId) => {
-        navigate(`/product/${productId}`);
+        navigate(`/edit/${productId}`);
     };
     return (
         <>
@@ -30,7 +30,6 @@ const Admin = () => {
                             <Card.Title>${product.productPrice}</Card.Title>
                             <Card.Text>{product.productBrand}</Card.Text>
                             <Button variant="dark" onClick={() => handleCardClick(product.id)}>Editar producto</Button>
-                            <p>(falta crear la pag de cada uno) y copiardo de dashboard (eliminar del codigo esta etiqueta p para que quede mejor)</p>
                         </Card.Body>
                     </Card>
                 ))}

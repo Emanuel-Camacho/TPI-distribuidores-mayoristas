@@ -6,7 +6,7 @@ import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
 
 
-const SingleProduct = () => {
+const EditProduct = () => {
     const { id } = useParams();
     const product = products.find((prod) => prod.id === Number(id));
 
@@ -36,4 +36,4 @@ const SingleProduct = () => {
     );
 };
 
-export default SingleProduct;
+export default EditProduct;
