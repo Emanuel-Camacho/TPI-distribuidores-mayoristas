@@ -125,7 +125,7 @@ const products = [
         id: 13,
         productName: "Flynn Paff",
         productBrand: "Georgalos",
-        productDetail: "Dulces de",
+        productDetail: "Caramelos masticables con un sabor intenso a uva",
         productPrice: 200,
         productImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2Pze0pV1DWPFRBYbt4WvvzF-RzJXKXgRYRg&s",
         category: "Caramelos",
