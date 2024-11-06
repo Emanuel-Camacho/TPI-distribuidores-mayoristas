@@ -16,9 +16,9 @@ const EditProduct = () => {
             <Container className="my-5">
                 <Row>
                 <Col md={6} className="text-center">
-                        <Image src={product.productImage} alt={product.productName} fluid className="w-75" />
+                        <Image src={product.productImage} alt={product.productName} fluid className= "product-image" />
                         <div className="d-flex justify-content-center mt-3">
-                            <Image src={product.productImage} alt={product.productName} thumbnail width="50" className="me-2" />
+                            <Image src={product.productImage} alt={product.productName} thumbnail width="50" className="me-2 product-thumbnail" />
                         </div>
                         <Button variant="dark" size="sm" className="mt-2">Editar Imagen</Button>
                     </Col>

@@ -17,8 +17,8 @@ const NavBar = ({ onLogout }) => {
     return (
         <Navbar expand="lg" className="navbar w-100">
             <Container fluid className="container">
-                <Navbar.Brand href="#" className="nombre-logo" >
-                    <img src="https://media.discordapp.net/attachments/1230880736777736363/1302353991325188189/images-removebg-preview.png?ex=6727cf2c&is=67267dac&hm=42099f75f764b518138e4245d4d88aa0ea65ef3602547b705179b6b9ccb0915b&=&format=webp&quality=lossless" alt="logo" className="logo-img mb-2" />
+                <Navbar.Brand onClick={handlerDashboard} className="nombre-logo" >
+                    <img src="https://cdn.discordapp.com/attachments/1230880736777736363/1302353991325188189/images-removebg-preview.png?ex=672d152c&is=672bc3ac&hm=cb1b67374a887792655a231d6b30770a15cd86c4abbbf82c082622e7268682d4&" alt="logo" className="logo-img mb-2" />
                     Todo al Por Mayor</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">

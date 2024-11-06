@@ -72,7 +72,10 @@
 .nombre-logo {
     flex: 1;
 }
+.nombre-logo:hover {
+    cursor: pointer;
+}
 
 .logo-img {
-    width: 130px;
+    width: 120px;
 }
