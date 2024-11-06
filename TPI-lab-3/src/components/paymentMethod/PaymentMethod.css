@@ -7,11 +7,11 @@
     background-color: #317634;
 }
 
-.debit-card-button {
+.card-button {
     background-color: #2834b5;
     color: #ffffff;
 }
 
-.debit-card-button:hover {
+.card-button:hover {
     background-color: #1e278d;
 }
