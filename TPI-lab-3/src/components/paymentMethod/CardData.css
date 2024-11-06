@@ -1,0 +1,26 @@
+.form-container {
+    width: 75%;
+    margin: 0 auto;
+    border-radius: '8px';
+}
+
+.payment-form-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input-custom {
+    border-radius: 4px;
+    background-color: lightgray;
+}
+
+.cancel-button {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: rgb(7, 10, 165);
+}
+
+.confirm-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
