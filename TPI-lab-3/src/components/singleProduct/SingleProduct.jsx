@@ -4,27 +4,30 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
+import './SingleProduct.css';
+import { useCart } from '../../context/CartContext.jsx';
 
 
 const SingleProduct = () => {
     const { id } = useParams();
     const product = products.find((prod) => prod.id === Number(id));
+    const { addToCart } = useCart();
 
-    const [quantity, setQuantity] = useState(1);
+    /* const [quantity, setQuantity] = useState(1);
 
     const handleQuantityChange = (type) => {
         setQuantity((prevQuantity) => (type === 'increment' ? prevQuantity + 1 : Math.max(prevQuantity - 1, 1)));
-    };
+    }; */
 
     return (
         <>
-            <NavBar/>
+            <NavBar />
             <Container className="my-5">
                 <Row>
                     <Col md={6} className="text-center">
-                        <Image src={product.productImage} alt={product.productName} fluid className="w-75" />
+                        <Image src={product.productImage} alt={product.productName} fluid className="product-image" />
                         <div className="d-flex justify-content-center mt-3">
-                            <Image src={product.productImage} alt={product.productName} thumbnail width="50" className="me-2" />
+                            <Image src={product.productImage} alt={product.productName} thumbnail width="50" className="product-thumbnail me-2" />
                         </div>
                     </Col>
                     <Col md={6}>
@@ -36,7 +39,7 @@ const SingleProduct = () => {
                         </div>
                         <p className="text-muted">{product.productDetail}</p>
 
-                        <Row className="my-4">
+                        {/* <Row className="my-4">
                             <Col xs={6}>
                                 <Form.Label>Cantidad</Form.Label>
                                 <div className="d-flex align-items-center">
@@ -45,13 +48,23 @@ const SingleProduct = () => {
                                     <Button variant="outline-secondary" onClick={() => handleQuantityChange('increment')}>+</Button>
                                 </div>
                             </Col>
-                        </Row>
+                        </Row> */}
 
-                        <Button variant="warning" className="w-100 my-3">Añadir al carrito</Button>
+                        <Button
+                            variant="warning"
+                            onClick={() => addToCart({
+                                id: product.id,
+                                productName: product.productName,
+                                productBrand: product.productBrand,
+                                productPrice: product.productPrice,
+                                productImage: product.productImage
+                            })}
+                            className="w-100 my-3">Añadir al carrito
+                        </Button>
                     </Col>
                 </Row>
             </Container>
-        <Footer/>
+            <Footer />
         </>
     );
 };
