@@ -17,6 +17,7 @@ import PaymentMethod from "./components/paymentMethod/PaymentMethod";
 import Admin from "./components/admin/Admin";
 import SysAdmin from "./components/sysadmin/SysAdmin";
 import EditProduct from "./components/admin/EditProducts";
+import AddProduct from "./components/admin/AddProduct";
 // Stlyes
 
 const App = () => {
@@ -64,6 +65,14 @@ const App = () => {
       element: (
         <Protected isSignedIn={isLoggedIn}>
           <EditProduct />
+        </Protected>
+      ),
+    },
+    {
+      path: "/addproduct",
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <AddProduct />
         </Protected>
       ),
     },
