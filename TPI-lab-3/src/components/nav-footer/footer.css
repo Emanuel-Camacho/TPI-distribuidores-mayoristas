@@ -9,3 +9,7 @@
 .nav-item:hover{
     text-decoration: underline;
 }
+
+.nav-link {
+    cursor: pointer;
+}

@@ -24,3 +24,20 @@
 .trash-button svg:hover {
     color: red;
 }
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+}
+
+.price-column {
+    width: 10%; 
+}
+
+.quantity-column {
+    width: 18%; 
+}
+
+.subtotal-column {
+    width: 10%; 
+}

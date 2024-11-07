@@ -9,15 +9,17 @@ const NavBar = ({ onLogout }) => {
         onLogout();
     };
     const handlerCart = () => {
-        navigate ('/cart');
+        navigate('/cart');
     }
     const handlerDashboard = () => {
-        navigate ('/');
+        navigate('/');
     }
     return (
         <Navbar expand="lg" className="navbar w-100">
             <Container fluid className="container">
-                <Navbar.Brand href="#" className="nombre-logo" >Todo al Por Mayor</Navbar.Brand>
+                <Navbar.Brand onClick={handlerDashboard} className="nombre-logo" >
+                    <img src="https://cdn.discordapp.com/attachments/1230880736777736363/1302353991325188189/images-removebg-preview.png?ex=672d152c&is=672bc3ac&hm=cb1b67374a887792655a231d6b30770a15cd86c4abbbf82c082622e7268682d4&" alt="logo" className="logo-img mb-2" />
+                    Todo al Por Mayor</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <div className="d-flex flex-column w-100">
@@ -46,10 +48,11 @@ const NavBar = ({ onLogout }) => {
                                 <Nav.Link onClick={handlerDashboard}>Inicio</Nav.Link>
                                 <Nav.Link href="#action2">Mis compras</Nav.Link>
                                 <NavDropdown title="Filtro" id="navbarScrollingDropdown">
-                                    <NavDropdown.Item href="#action3">Ropa</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action4">Libreria</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action3">Bebida</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action4">Bebida Alcoholica</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action5">Snacks</NavDropdown.Item>
                                     {/* <NavDropdown.Divider /> */}
-                                    <NavDropdown.Item href="#action5">Comida</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action6">Dulces</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
 
