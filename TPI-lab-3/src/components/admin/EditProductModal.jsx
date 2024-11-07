@@ -11,12 +11,20 @@ function EditProductModal({ show, handleClose, product }) {
     const [category, setCategory] = useState(product.category);
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleShowConfirmModal = () => setShowConfirmModal(true);
+    const handleShowConfirmModal = () => {
+        if (!productName || !productBrand || !productDetail || !productPrice || !category) {
+            setErrorMessage('Todos los campos son obligatorios, excepto la URL de la imagen.');
+        } else {
+            setErrorMessage('');
+            setShowConfirmModal(true);
+        }
+    };
+
     const handleCloseConfirmModal = () => setShowConfirmModal(false);
 
     const handleSubmit = () => {
-        //Falta funcionamiento para que se guarde el producto editado
         const updatedProduct = {
             ...product,
             productName,
@@ -45,6 +53,7 @@ function EditProductModal({ show, handleClose, product }) {
                             type="text" 
                             value={productName} 
                             onChange={(e) => setProductName(e.target.value)} 
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="formProductBrand">
@@ -53,6 +62,7 @@ function EditProductModal({ show, handleClose, product }) {
                             type="text" 
                             value={productBrand} 
                             onChange={(e) => setProductBrand(e.target.value)} 
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="formProductDetail">
@@ -61,6 +71,7 @@ function EditProductModal({ show, handleClose, product }) {
                             type="text" 
                             value={productDetail} 
                             onChange={(e) => setProductDetail(e.target.value)} 
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="formProductPrice">
@@ -69,6 +80,7 @@ function EditProductModal({ show, handleClose, product }) {
                             type="number" 
                             value={productPrice} 
                             onChange={(e) => setProductPrice(e.target.value)} 
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="formProductImage">
@@ -85,6 +97,7 @@ function EditProductModal({ show, handleClose, product }) {
                             as="select" 
                             value={category} 
                             onChange={(e) => setCategory(e.target.value)}
+                            required
                         >
                             <option value="Bebidas">Bebidas</option>
                             <option value="Bebidas Alcohólicas">Bebidas Alcohólicas</option>
@@ -92,6 +105,9 @@ function EditProductModal({ show, handleClose, product }) {
                             <option value="Snacks">Snacks</option>
                         </Form.Control>
                     </Form.Group>
+                    {errorMessage && (
+                        <div className="text-danger mt-3">{errorMessage}</div>
+                    )}
                 </Form>
             </Modal.Body>
             <Modal.Footer className="modal-footer-custom">
