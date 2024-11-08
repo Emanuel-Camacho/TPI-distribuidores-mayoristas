@@ -192,11 +192,15 @@ const Dashboard = () => {
     const handleAdmin = () => {
         navigate('/admin');
     }
+    const handleSuperAdmin = () => {
+        navigate('/sysadmin');
+    }
 
     return (
         <>
             <NavBar/>
             <button onClick={handleAdmin}>Ir a la pagina admin</button>
+            <button onClick={handleSuperAdmin}>Ir a la pagina superAdmin</button>
             <div className="card-list">
                 {products.map((product) => (
                     <ProductCard

@@ -1,0 +1,37 @@
+.form-container {
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.createuser-form-container {
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-custom {
+    color: black;
+    border-radius: 20px;
+    background-color: lightgray;
+}
+
+.confirm-button {
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+    border: none;
+}
+
+.modal-create-user {
+    color: white;
+}
+.modal-header-custom {
+    background-color: #474747;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+}
+.confirm-button-modal{
+    background-color: #28d405;
+    color: black;
+}
+
