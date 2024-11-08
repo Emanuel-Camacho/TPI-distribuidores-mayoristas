@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Modal } from 'react-bootstrap';
 import './AddUser.css';
 
@@ -9,6 +10,7 @@ const CreateUser = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [role, setRole] = useState('user');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const navigate = useNavigate();
 
     const handleOpenConfirmModal = (e) => {
         e.preventDefault();
@@ -29,14 +31,17 @@ const CreateUser = () => {
     const handleCloseConfirmModal = () => {
         setShowConfirmModal(false);
     };
+    const handleBack =()=>{
+        navigate('/sysadmin');
+    }
 
     const handleConfirmSubmit = () => {
-        const newUser = {
+        /* const newUser = {
             username,
             email,
             password,
-            role,
-        };
+            userType,
+        }; */
 
         setShowConfirmModal(false);
         //addUser(newUser); lógica para agregar el nuevo usuario
@@ -44,7 +49,7 @@ const CreateUser = () => {
         setEmail('');
         setPassword('');
         setConfirmPassword('');
-        setRole('user');
+        setRole('Client');
     };
 
     return (
@@ -102,15 +107,17 @@ const CreateUser = () => {
                             className="input-custom"
                             required
                         >
-                            <option value="user">user</option>
-                            <option value="admin">admin</option>
-                            <option value="sysAdmin">sysAdmin</option>
+                            <option value="user">Client</option>
+                            <option value="admin">Admin</option>
+                            <option value="sysAdmin">SysAdmin</option>
                         </Form.Control>
                     </Form.Group>
-
+                    <div className="d-flex justify-content-between mt-3">
+                        <Button variant='secondary' className='mt-3' onClick={handleBack}>Volver</Button>
                     <Button variant="primary" type="submit" className="mt-3 confirm-button" >
                         Crear Usuario
                     </Button>
+                    </div>
                 </Form>
             </Container>
             

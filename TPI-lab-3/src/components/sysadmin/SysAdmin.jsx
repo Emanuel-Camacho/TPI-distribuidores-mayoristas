@@ -16,11 +16,11 @@ const SysAdmin = () => {
     const navigate = useNavigate();
 
     const users = [
-        { id: 1, name: 'Nombre 1', email: 'email1@example.com' },
-        { id: 2, name: 'Nombre 2', email: 'email2@example.com' },
-        { id: 3, name: 'Nombre 3', email: 'email3@example.com' },
-        { id: 4, name: 'Nombre 4', email: 'email4@example.com' },
-        { id: 5, name: 'Nombre 5', email: 'email5@example.com' },
+        { id: 1, name: 'Nombre 1', email: 'email1@example.com', userType:"Client" },
+        { id: 2, name: 'Nombre 2', email: 'email2@example.com', userType:"Client" },
+        { id: 3, name: 'Nombre 3', email: 'email3@example.com', userType:"Admin" },
+        { id: 4, name: 'Nombre 4', email: 'email4@example.com', userType:"Admin" },
+        { id: 5, name: 'Nombre 5', email: 'email5@example.com', userType:"SysAdmin" },
     ];
     const handleShowModal = (user) => {
         setSelectedUser(user);
@@ -68,6 +68,7 @@ const SysAdmin = () => {
                         <tr>
                             <th>Nombre</th>
                             <th>Email</th>
+                            <th>Rol</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -76,6 +77,7 @@ const SysAdmin = () => {
                             <tr key={user.id}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
+                                <td>{user.userType}</td>
                                 <td className='actions'>
                                 <a 
                                         href="#" 
