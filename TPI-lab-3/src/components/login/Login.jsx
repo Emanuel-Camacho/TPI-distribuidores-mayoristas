@@ -55,40 +55,24 @@ const Login = ({ onLogin }) => {
             }));
             return;
         }
-
-        /* try {
-            const response = await fetch("http://localhost:8000/login", {
+        try {
+            const response = await fetch("https://localhost:7121/api/Authentication",{
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
-
-            if (!response.ok) {
-                throw new Error("Usuario o contraseña incorrecta");
+            if (response.ok) {
+                const token = await response.text();
+                localStorage.setItem("authToken", token);
+                onLogin();
+                navigate("/");
+            } else {
+                alert("Usuario o contraseña incorrectos.");
             }
-
-            const data = await response.json();
-            console.log("Tipo de usuario:", data.userType);
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
-
-            if (data.userType === "client") {
-                
-            } else if (data.userType === "seller") {
-                navigate("/admin");
-            } else if (data.userType === "sysAdmin") {
-                navigate("/sysadmin");
-            }
-
-            
-        } catch (error) {
-            console.error("Error al iniciar sesión:", error);
-            alert(error.message);
-        }*/
-    onLogin();
-    navigate("/");
+        }catch (error) {
+            console.error("Error al autenticar:", error);
+            alert("Hubo un error en la autenticación.");
+        }
     }; 
     
     const handleRegisterRedirect = () => {

@@ -2,11 +2,10 @@ import { Button, Container, Form, Nav, Navbar, NavDropdown } from "react-bootstr
 import './nav.css'
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({ onLogout }) => {
+const NavBar = () => {
     const navigate = useNavigate();
     const handleLogout = () => {
         navigate("/login");
-        onLogout();
     };
     const handlerCart = () => {
         navigate('/cart');
