@@ -1,0 +1,51 @@
+.modal-header-custom {
+    background-color: #1c1c1c; 
+    color: #ffffff; 
+    border: none;
+    text-align: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.modal-body-custom {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 20px;
+}
+
+.modal-footer-custom {
+    background-color: #000000;
+    border-top: none;
+    justify-content: center;
+}
+
+.form-control-custom {
+    background-color: #1c1c1c; 
+    color: #ffffff; 
+    border: 1px solid #333333; 
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.form-control-custom:focus {
+    border-color: #00ff00; 
+    box-shadow: none;
+}
+
+
+.modal-confirmation-header{
+    background-color: white;
+    color: rgb(0, 0, 0);
+}
+
+.modal-confirmation {
+    background-color: rgb(255, 255, 255); 
+    color: rgb(0, 0, 0);
+}
+
+.modal-confirmation-footer{
+    background-color: white;
+    color: black;
+}
+

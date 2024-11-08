@@ -19,6 +19,7 @@ import SysAdmin from "./components/sysadmin/SysAdmin";
 import EditProduct from "./components/admin/EditProducts";
 import AddProduct from "./components/admin/AddProduct";
 import CardData from "./components/paymentMethod/CardData";
+import CreateUser from "./components/sysadmin/AddUser";
 // Stlyes
 
 const App = () => {
@@ -45,14 +46,22 @@ const App = () => {
         </Protected>
       ),
     },
-    /*{
+    {
       path: "/sysadmin",
       element: (
         <Protected isSignedIn={isLoggedIn}>
           <SysAdmin />
         </Protected>
       ), 
-    },*/
+    },
+    {
+      path: "/adduser",
+      element: (
+        <Protected isSignedIn={isLoggedIn}>
+          <CreateUser />
+        </Protected>
+      ),
+    },
     {
       path: "/product/:id",
       element: (

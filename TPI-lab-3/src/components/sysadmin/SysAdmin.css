@@ -1,0 +1,61 @@
+.admin-table-container {
+    width: 75%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.table-title{
+    display: block;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.create-user-btn {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    border: none;
+}
+
+.user-table {
+    background-color: #e0e0e0;
+}
+
+.user-table th{
+    text-align: center;
+    padding: 12px;
+}
+.user-table td {
+    text-align: left;
+    padding: 12px;
+}
+
+.user-table td.actions {
+    text-align: right;
+    padding: 12px;
+}
+
+
+.edit-link {
+    color: #006400;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+.delete-link {
+    color: #d9534f;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.delete-link:hover {
+    text-decoration: underline;
+}

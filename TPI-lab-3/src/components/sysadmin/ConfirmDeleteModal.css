@@ -1,0 +1,37 @@
+.modal-header-custom {
+    background-color: #474747;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+}
+
+.modal-body-custom {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.modal-footer-custom {
+    background-color: #000;
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-button {
+    background-color: #ff0000;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    padding: 8px 16px;
+    font-weight: bold;
+}
+
+.cancel-button {
+    color: #474747;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
