@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Modal, Alert } from 'react-bootstrap';
 import { products } from '../dashboard/Dashboard';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
-import './AddProduct.css';
+import'./AddProduct.css';
 
 const AddProduct = ({ addProduct }) => {
     const [productName, setProductName] = useState('');
@@ -14,6 +15,7 @@ const AddProduct = ({ addProduct }) => {
     const [category, setCategory] = useState('Bebidas');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleOpenConfirmModal = (e) => {
         e.preventDefault();
@@ -30,6 +32,10 @@ const AddProduct = ({ addProduct }) => {
         setShowConfirmModal(false);
     };
 
+    const handleBack =()=>{
+        navigate('/admin');
+    }
+
     const handleConfirmSubmit = () => {
         const maxId = Math.max(...products.map((prod) => prod.id), 0);
         const newProduct = {
@@ -42,7 +48,7 @@ const AddProduct = ({ addProduct }) => {
             category,
         };
         setShowConfirmModal(false);
-        addProduct(newProduct); //logica para agregar nuevo producto
+        //addProduct(newProduct); //logica para agregar nuevo producto
         setProductName('');
         setProductBrand('');
         setProductDetail('');
@@ -121,16 +127,18 @@ const AddProduct = ({ addProduct }) => {
                             <option value="Snacks">Snacks</option>
                         </Form.Control>
                     </Form.Group>
-
-                    <Button variant="success" type="submit" className="mt-3 confirm-buttom">
-                        Crear Producto
-                    </Button>
+                    <div className="d-flex justify-content-between mt-3">
+                        <Button variant='secondary' className='mt-3' onClick={handleBack}>Volver</Button>
+                        <Button variant="success" type="submit" className="mt-3 confirm-buttom">
+                            Crear Producto
+                        </Button>
+                    </div>
                 </Form>
             </Container>
             <Footer />
 
-            <Modal show={showConfirmModal} onHide={handleCloseConfirmModal} centered className='modal-addproduct'>
-                <Modal.Header closeButton>
+            <Modal show={showConfirmModal} onHide={handleCloseConfirmModal} backdrop="static" keyboard={false} centered className='modal-addproduct'>
+                <Modal.Header closeButton className='modal-header-custom'>
                     <Modal.Title>Confirmar Creación</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

@@ -104,7 +104,7 @@ function EditProductModal({ show, handleClose, product }) {
             </Modal.Footer>
         </Modal>
 
-        <Modal show={showConfirmModal} onHide={handleCloseConfirmModal} centered className="modal-confirmation">
+        <Modal show={showConfirmModal} onHide={handleCloseConfirmModal} backdrop="static" keyboard={false} centered className="modal-confirmation">
             <Modal.Header closeButton>
                 <Modal.Title>Confirmar Cambios</Modal.Title>
             </Modal.Header>

@@ -75,7 +75,7 @@
 }
 
 .modal-confirmation .modal-content {
-    background-color: white; 
+    background-color: rgb(255, 255, 255); 
     color: black;
     border-radius: 8px; 
 }
