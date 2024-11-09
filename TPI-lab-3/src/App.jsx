@@ -1,8 +1,8 @@
 // Libraries
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthenticationProvider } from "./services/auth/Auth.context";
 // Helpers
 
 // Custom components
@@ -20,20 +20,15 @@ import EditProduct from "./components/admin/EditProducts";
 import AddProduct from "./components/admin/AddProduct";
 import CardData from "./components/paymentMethod/CardData";
 import CreateUser from "./components/sysadmin/AddUser";
+
 // Stlyes
 
-const App = () => {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const loginHandler = () => {
-    setIsLoggedIn(true);
-  };
-
+function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Client']}>
           <Dashboard />
         </Protected>
       ),
@@ -41,7 +36,7 @@ const App = () => {
     {
       path: "/admin",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Admin']}>
           <Admin />
         </Protected>
       ),
@@ -49,7 +44,7 @@ const App = () => {
     {
       path: "/sysadmin",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['SysAdmin']}>
           <SysAdmin />
         </Protected>
       ), 
@@ -57,7 +52,7 @@ const App = () => {
     {
       path: "/adduser",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['SysAdmin']}>
           <CreateUser />
         </Protected>
       ),
@@ -65,7 +60,7 @@ const App = () => {
     {
       path: "/product/:id",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Client']}>
           <SingleProduct />
         </Protected>
       ),
@@ -73,7 +68,7 @@ const App = () => {
     {
       path: "/edit/:id",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Admin']}>
           <EditProduct />
         </Protected>
       ),
@@ -81,7 +76,7 @@ const App = () => {
     {
       path: "/addproduct",
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Admin']}>
           <AddProduct />
         </Protected>
       ),
@@ -89,7 +84,7 @@ const App = () => {
     {
       path: "/cart", 
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Client']}>
           <Cart />
         </Protected>
       ),
@@ -97,7 +92,7 @@ const App = () => {
     {
       path: "/paymentmethod", 
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Client']}>
           <PaymentMethod />
         </Protected>
       ),
@@ -105,16 +100,16 @@ const App = () => {
     {
       path: "/carddata", 
       element: (
-        <Protected isSignedIn={isLoggedIn}>
+        <Protected allowedRoles={['Client']}>
           <CardData />
         </Protected>
       ),
     },
     {
-      path: "/login", element: <Login onLogin={loginHandler} />
+      path: "/login", element: <Login/>
     },
     {
-      path: "/register", element: <Register onRegister={loginHandler} />
+      path: "/register", element: <Register/>
     },
     {
       path: "*", element: <NotFound />
@@ -123,7 +118,9 @@ const App = () => {
 
   return (
     <div className="d-flex flex-column align-items-center">
-      <RouterProvider router={router} />
+      <AuthenticationProvider>
+        <RouterProvider router={router} />
+      </AuthenticationProvider>
     </div>
   );
 };

@@ -1,16 +1,28 @@
+import { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { AuthenticationContext } from "../../services/auth/Auth.context";
 
-const Protected = ({ isSignedIn, children }) => {
-    if (!isSignedIn) {
-        return <Navigate to="/login" replace />;
+const Protected = ({ allowedRoles, children }) => {
+    const { user } = useContext(AuthenticationContext);
+
+    useEffect(() => {
+        console.log("User changed in Protected:", user); 
+    }, [user]);
+
+    if (!user) return <Navigate to="/login" replace />;
+    
+    if (!allowedRoles.includes(user.userType)) {
+    
+    return <Navigate to="/login" replace />;
     }
-    return children;
-};
 
-Protected.propTypes = {
-    isSignedIn: PropTypes.bool,
-    children: PropTypes.object,
+    return (
+        <>
+        {console.log("Outlet is rendered")}
+        {children}
+        </>
+    )
+    
 };
 
 export default Protected;

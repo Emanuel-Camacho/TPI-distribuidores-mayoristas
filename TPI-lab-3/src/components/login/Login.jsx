@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../services/auth/Auth.context";
 
 import './login.css'
 
@@ -11,7 +12,9 @@ const Login = ({ onLogin }) => {
         email: false,
         password: false,
     });
+    const [error, setError] = useState("")
 
+    const { handleLogin } = useAuth();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     // referencian los inputs directamente
@@ -35,7 +38,7 @@ const Login = ({ onLogin }) => {
         }));
     };
 
-    const handleLogin = async () => {
+    const handleSubmit = async () => {
         if (emailRef.current.value.length === 0) {
             alert("¡Email vacío!");
             emailRef.current.focus();
@@ -56,19 +59,29 @@ const Login = ({ onLogin }) => {
             return;
         }
         try {
-            const response = await fetch("https://localhost:7121/api/Authentication",{
+            const response = await fetch("https://localhost:7121/api/Authentication/login",{
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
-            if (response.ok) {
-                const token = await response.text();
-                localStorage.setItem("authToken", token);
-                onLogin();
-                navigate("/");
-            } else {
-                alert("Usuario o contraseña incorrectos.");
+
+            if (!response.ok) {
+                throw new Error("Usuario o contraseña incorrectos.");
             }
+            const { token, id, email: userEmail, userType } = await response.json();
+            localStorage.setItem("authToken", token);
+
+            handleLogin(userEmail, userType, id, token);
+            
+            if (userType === "Client") {
+                navigate("/");
+            } else if (userType === "Admin") {
+                navigate("/admin");
+            } else if (userType === "SysAdmin") {
+                navigate("/sysadmin");
+            }
+            console.log("User Type:", userType);
+            console.log("Token:", token);
         }catch (error) {
             console.error("Error al autenticar:", error);
             alert("Hubo un error en la autenticación.");
@@ -118,7 +131,7 @@ const Login = ({ onLogin }) => {
                             </FormGroup>
                             <Button
                                 className="w-100 btn-login mb-3"
-                                onClick={handleLogin}
+                                onClick={handleSubmit}
                                 variant="primary"
                             >
                                 Ingresar
