@@ -1,21 +1,30 @@
-import { createContext, useState, useContext } from "react";
-
+import { createContext, useState, useContext, useEffect } from "react";
 export const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem("authToken"));
 
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("userData"));
+        if (token && storedUser) {
+            setUser(storedUser);
+        }
+    }, [token]);
+
     const handleLogin = (email, userType, id, token) => {
+        const userData = {email, userType, id};
         setUser({ email, userType, id });
         setToken(token);
         localStorage.setItem("authToken", token);
+        localStorage.setItem("userData", JSON.stringify(userData));
     };
 
     const handleLogout = () => {
         setUser(null);
         setToken(null);
         localStorage.removeItem("authToken");
+        localStorage.removeItem("userData");
     };
 
     console.log("User in Auth Context:", user);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import './EditUserModal.css';
 
-function EditUserModal({ show, handleClose, user, token, handleSave, onUserUpdated }) {
+function EditUserModal({ show, handleClose, user, token }) {
     const [userName, setUserName] = useState(user?.userName || '');
     const [userEmail, setUserEmail] = useState(user?.email || '');
     const [loading, setLoading] = useState(false);
@@ -22,46 +22,41 @@ function EditUserModal({ show, handleClose, user, token, handleSave, onUserUpdat
         }
     };
 
-    const handleCloseConfirmModal = () => setShowConfirmModal(false);
+    const handleCloseConfirmModal = () =>{
+        setShowConfirmModal(false);
+        window.location.reload();
+    }; 
+
 
     const handleSubmit = async () => {
-        if (!userName || !userEmail) {
-            alert('Todos los campos son obligatorios.');
-            return;
-        }
-
         setLoading(true);
+        setError(null);
+
         try {
+            const updatedUser = {
+                id: user.id,
+                userName: userName.trim() || user.userName,
+                email: userEmail.trim() || user.email,
+                password: "...", //ya toma la password actual del usuario seleccionado
+                userType: user.userType
+            };
             const response = await fetch(`https://localhost:7121/api/User/${user.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({
-                    userName,
-                    email: userEmail,
-                }),
+                body: JSON.stringify(updatedUser),
             });
 
-            if (!response.ok) {
-                throw new Error('Error al actualizar el usuario');
+            if (response.ok) {
+                handleClose();
+                handleCloseConfirmModal();
+            } else {
+                setError('Error al actualizar el usuario');
             }
-
-            const updatedUser = await response.json();
-
-            if (onUserUpdated) {
-                onUserUpdated(updatedUser);
-            }
-
-            alert(`Usuario actualizado: ${updatedUser.userName}`);
-            handleCloseConfirmModal();
-            handleClose();
         } catch (err) {
-            setError(err.message);
-            console.error('Error al actualizar el usuario', err);
-            alert('Hubo un error al procesar la solicitud');
-            console.log(response);
+            setError('Error en la solicitud: ' + err.message);
         } finally {
             setLoading(false);
         }
@@ -98,7 +93,7 @@ function EditUserModal({ show, handleClose, user, token, handleSave, onUserUpdat
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className="modal-footer-custom">
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleCloseConfirmModal}>
                         Cancelar
                     </Button>
                     <Button variant="success" onClick={handleShowConfirmModal}>
@@ -118,7 +113,7 @@ function EditUserModal({ show, handleClose, user, token, handleSave, onUserUpdat
                     <Button variant="secondary" onClick={handleCloseConfirmModal}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
+                    <Button variant="primary" onClick={handleSubmit} disabled={loading}>
                         Confirmar
                     </Button>
                 </Modal.Footer>

@@ -13,6 +13,7 @@ const Login = ({ onLogin }) => {
         password: false,
     });
     const [error, setError] = useState("")
+    const {token} = useAuth();
 
     const { handleLogin } = useAuth();
     const emailRef = useRef(null);
@@ -70,7 +71,7 @@ const Login = ({ onLogin }) => {
             }
             const { token, id, email: userEmail, userType } = await response.json();
             localStorage.setItem("authToken", token);
-
+            localStorage.setItem("userData", JSON.stringify({ email: userEmail, userType, id }));
             handleLogin(userEmail, userType, id, token);
             
             if (userType === "Client") {
@@ -110,7 +111,7 @@ const Login = ({ onLogin }) => {
                                     value={email}
                                     onChange={handleChangeEmail}
                                     type="email"
-                                    placeholder="Usuario"
+                                    placeholder="Email"
                                 />
                                 {errors.email && (
                                     <p className="text-danger">El email no debe ser vacío</p>

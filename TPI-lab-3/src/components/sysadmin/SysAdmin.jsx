@@ -148,11 +148,6 @@ const SysAdmin = () => {
                             handleClose={handleCloseEditModal}
                             user={selectedUser}
                             token={token}
-                            onUserUpdated={(updatedUser) => {
-                                setUsers(users.map(user =>
-                                    user.id === updatedUser.id ? { ...user, userName: updatedUser.userName, email: updatedUser.email } : user
-                                ));
-                            }}
                         />
                 </>
                 )}

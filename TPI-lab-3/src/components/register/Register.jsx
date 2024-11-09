@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import '../register/Register.css'
-/* import '../login/login.css' */
+
 
 const Register = ({ onRegister }) => {
     const [username, setUsername] = useState("");
@@ -103,27 +103,31 @@ const Register = ({ onRegister }) => {
             }));
             return;
         }
-
-        /* try {
-            const response = await fetch('http://localhost:8000/register', {
-                method: 'POST',
+        const newUser = {
+            UserName: username,
+            Email: email,
+            Password: password,
+            UserType: "Client" 
+        };
+        try {
+            const response = await fetch("https://localhost:7121/api/Register", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ username, email, password }),
+                body: JSON.stringify(newUser)
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Error en el registro');
+            if (response.ok) {
+                alert("Usuario registrado con éxito");
+                navigate("/login");
+            } else {
+                alert("Error al registrar el usuario");
             }
-            catch (error) {
-            alert(error.message);
-            }   
-            } */
-        onRegister();
-        navigate("/"); 
+        } catch (error) {
+            console.error("Error al registrar el usuario:", error);
+            alert("Ocurrió un error en el servidor");
+        }
     };
 
     const handleLoginRedirect = () => {

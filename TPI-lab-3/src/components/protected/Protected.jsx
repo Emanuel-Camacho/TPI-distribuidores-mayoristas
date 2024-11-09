@@ -3,15 +3,15 @@ import { Navigate } from "react-router-dom";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const Protected = ({ allowedRoles, children }) => {
-    const { user } = useContext(AuthenticationContext);
+    const { user, token } = useContext(AuthenticationContext);
 
     useEffect(() => {
         console.log("User changed in Protected:", user); 
     }, [user]);
 
-    if (!user) return <Navigate to="/login" replace />;
+    if (!user && !token) return <Navigate to="/login" replace />;
     
-    if (!allowedRoles.includes(user.userType)) {
+    if (user && !allowedRoles.includes(user.userType)) {
     
     return <Navigate to="/login" replace />;
     }
