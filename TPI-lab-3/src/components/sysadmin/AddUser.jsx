@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Modal } from 'react-bootstrap';
 import './AddUser.css';
+import { useAuth } from '../../services/auth/Auth.context';
 
 const CreateUser = () => {
     const [username, setUsername] = useState('');
@@ -11,6 +12,7 @@ const CreateUser = () => {
     const [role, setRole] = useState('user');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const navigate = useNavigate();
+    const { token } = useAuth();
 
     const handleOpenConfirmModal = (e) => {
         e.preventDefault();
@@ -35,21 +37,40 @@ const CreateUser = () => {
         navigate('/sysadmin');
     }
 
-    const handleConfirmSubmit = () => {
-        /* const newUser = {
-            username,
-            email,
-            password,
-            userType,
-        }; */
+    const handleConfirmSubmit = async () => {
+        const newUser = {
+            userName: username,
+            email: email,
+            password: password,
+            userType: role,
+        };
 
-        setShowConfirmModal(false);
-        //addUser(newUser); lógica para agregar el nuevo usuario
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setRole('Client');
+        try {
+            const response = await fetch('https://localhost:7121/api/User', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(newUser),
+            });
+    
+            if (response.ok) {
+                alert('Usuario creado exitosamente');
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                setRole('Client');
+                setShowConfirmModal(false);
+                navigate('/sysadmin');
+            } else {
+                alert('Error al crear el usuario');
+            }
+        } catch (error) {
+            console.error('Error al crear el usuario:', error);
+            alert('Error al crear el usuario');
+        }
     };
 
     return (

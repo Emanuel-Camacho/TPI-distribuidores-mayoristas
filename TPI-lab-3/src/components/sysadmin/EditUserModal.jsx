@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import './EditUserModal.css';
 
-function EditUserModal({ show, handleClose, user, handleSave }) {
-    const [userName, setUserName] = useState(user?.name || '');
+function EditUserModal({ show, handleClose, user, token, handleSave, onUserUpdated }) {
+    const [userName, setUserName] = useState(user?.userName || '');
     const [userEmail, setUserEmail] = useState(user?.email || '');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     useEffect(() => {
-        setUserName(user?.name || '');
+        setUserName(user?.userName || '');
         setUserEmail(user?.email || '');
     }, [user]);
 
@@ -22,10 +24,47 @@ function EditUserModal({ show, handleClose, user, handleSave }) {
 
     const handleCloseConfirmModal = () => setShowConfirmModal(false);
 
-    const handleSubmit = () => {
-        handleSave({ ...user, name: userName, email: userEmail });
-        handleCloseConfirmModal();
-        handleClose();
+    const handleSubmit = async () => {
+        if (!userName || !userEmail) {
+            alert('Todos los campos son obligatorios.');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const response = await fetch(`https://localhost:7121/api/User/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    userName,
+                    email: userEmail,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar el usuario');
+            }
+
+            const updatedUser = await response.json();
+
+            if (onUserUpdated) {
+                onUserUpdated(updatedUser);
+            }
+
+            alert(`Usuario actualizado: ${updatedUser.userName}`);
+            handleCloseConfirmModal();
+            handleClose();
+        } catch (err) {
+            setError(err.message);
+            console.error('Error al actualizar el usuario', err);
+            alert('Hubo un error al procesar la solicitud');
+            console.log(response);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

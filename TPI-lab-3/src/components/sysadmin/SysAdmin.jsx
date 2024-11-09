@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import './SysAdmin.css';
@@ -7,21 +7,41 @@ import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
 import EditUserModal from './EditUserModal';
+import { useAuth } from '../../services/auth/Auth.context';
 
 const SysAdmin = () => {
 
+    const [users, setUsers] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const navigate = useNavigate();
+    const { token } = useAuth();
 
-    const users = [
-        { id: 1, name: 'Nombre 1', email: 'email1@example.com', userType:"Client" },
-        { id: 2, name: 'Nombre 2', email: 'email2@example.com', userType:"Client" },
-        { id: 3, name: 'Nombre 3', email: 'email3@example.com', userType:"Admin" },
-        { id: 4, name: 'Nombre 4', email: 'email4@example.com', userType:"Admin" },
-        { id: 5, name: 'Nombre 5', email: 'email5@example.com', userType:"SysAdmin" },
-    ];
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('https://localhost:7121/api/User', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setUsers(data);
+                } else {
+                    console.error('Error al obtener los usuarios');
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+            }
+        };
+
+        fetchUsers();
+    }, [token]);
+
     const handleShowModal = (user) => {
         setSelectedUser(user);
         setShowModal(true);
@@ -31,9 +51,25 @@ const SysAdmin = () => {
         setShowModal(false);
         setSelectedUser(null);
     };
-    const handleConfirmDelete = () => {
-        alert(`Usuario eliminado: ${selectedUser.name}`);
-        // logica para eliminar al usuario de la lista
+    const handleConfirmDelete = async () => {
+        try {
+            const response = await fetch(`https://localhost:7121/api/User/${selectedUser.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+    
+            if (response.ok) {
+                setUsers(users.filter(user => user.id !== selectedUser.id));
+                alert(`Usuario eliminado: ${selectedUser.userName}`);
+            } else {
+                console.error('Error al eliminar el usuario');
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+        }
     };
 
     const handleAddUser = () => {
@@ -48,11 +84,6 @@ const SysAdmin = () => {
     const handleCloseEditModal = () => {
         setShowEditModal(false);
         setSelectedUser(null);
-    };
-
-    const handleSaveUser = (updatedUser) => {
-        alert(`Usuario actualizado: ${updatedUser.name} (${updatedUser.email})`);
-        // lógica para actualizar el usuario en la lista
     };
 
     return (
@@ -75,7 +106,7 @@ const SysAdmin = () => {
                     <tbody>
                         {users.map((user) => (
                             <tr key={user.id}>
-                                <td>{user.name}</td>
+                                <td>{user.userName}</td>
                                 <td>{user.email}</td>
                                 <td>{user.userType}</td>
                                 <td className='actions'>
@@ -110,13 +141,18 @@ const SysAdmin = () => {
                         show={showModal}
                         handleClose={handleCloseModal}
                         handleConfirmDelete={handleConfirmDelete}
-                        userName={selectedUser.name}
+                        userName={selectedUser.userName}
                     />
                     <EditUserModal
                             show={showEditModal}
                             handleClose={handleCloseEditModal}
                             user={selectedUser}
-                            handleSave={handleSaveUser}
+                            token={token}
+                            onUserUpdated={(updatedUser) => {
+                                setUsers(users.map(user =>
+                                    user.id === updatedUser.id ? { ...user, userName: updatedUser.userName, email: updatedUser.email } : user
+                                ));
+                            }}
                         />
                 </>
                 )}
