@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import './productCard.css';
 import { useCart } from '../../context/CartContext.jsx';
 
-const ProductCard = ({ productName = "Producto sin nombre", productBrand = "Marca desconocida", productPrice = "0.00", productImage = "", id = -1 }) => {
+const ProductCard = ({ productName = "Producto sin nombre",
+    productBrand = "Marca desconocida", 
+    productPrice = "0.00", 
+    productImageUrl = "", 
+    id = -1 }) => {
     const placeholderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmNILEZppKJCs1LHgBaUGbbFzQJsv6b5bt-w&s";
     const navigate = useNavigate();
     const { addToCart } = useCart(); 
@@ -17,7 +21,7 @@ const ProductCard = ({ productName = "Producto sin nombre", productBrand = "Marc
         <Card className="card-container" key={id}>
             <Card.Img
                 className="card-image"
-                src={productImage !== "" ? productImage : placeholderImage}
+                src={productImageUrl !== "" ? productImageUrl : placeholderImage}
                 alt={productName}
             />
             <Card.Body>
@@ -26,7 +30,7 @@ const ProductCard = ({ productName = "Producto sin nombre", productBrand = "Marc
                 <Card.Text>{productBrand}</Card.Text>
                 <Button
                     variant="success"
-                    onClick={() => addToCart({ id, productName, productBrand, productPrice, productImage })}
+                    onClick={() => addToCart({ id, productName, productBrand, productPrice, productImageUrl })}
                 >
                     Añadir
                 </Button>

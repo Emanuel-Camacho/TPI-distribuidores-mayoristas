@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { products } from '../dashboard/Dashboard';
 import React, { useState } from 'react';
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
 import NavBar from "../nav-footer/nav";

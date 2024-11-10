@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { products } from '../dashboard/Dashboard';
 import React, { useState } from 'react';
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
 import NavBar from "../nav-footer/nav";
@@ -25,9 +24,9 @@ const SingleProduct = () => {
             <Container className="my-5">
                 <Row>
                     <Col md={6} className="text-center">
-                        <Image src={product.productImage} alt={product.productName} fluid className="product-image" />
+                        <Image src={product.productImageUrl} alt={product.productName} fluid className="product-image" />
                         <div className="d-flex justify-content-center mt-3">
-                            <Image src={product.productImage} alt={product.productName} thumbnail width="50" className="product-thumbnail me-2" />
+                            <Image src={product.productImageUrl} alt={product.productName} thumbnail width="50" className="product-thumbnail me-2" />
                         </div>
                     </Col>
                     <Col md={6}>
@@ -53,11 +52,11 @@ const SingleProduct = () => {
                         <Button
                             variant="warning"
                             onClick={() => addToCart({
-                                id: product.id,
+                                id,
                                 productName: product.productName,
                                 productBrand: product.productBrand,
                                 productPrice: product.productPrice,
-                                productImage: product.productImage
+                                productImageUrl: product.productImageUrl
                             })}
                             className="w-100 my-3">Añadir al carrito
                         </Button>

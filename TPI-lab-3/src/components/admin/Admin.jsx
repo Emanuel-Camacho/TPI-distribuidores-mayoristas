@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-import { products } from "../dashboard/Dashboard";
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
 import './Admin.css'

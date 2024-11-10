@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Modal, Alert } from 'react-bootstrap';
-import { products } from '../dashboard/Dashboard';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
