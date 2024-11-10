@@ -1,9 +1,11 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import './ConfirmPurchaseModal.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function ConfirmPurchaseModal({ show, handleClose }) {
+    const navigate = useNavigate();
     return (
         <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered >
             <Modal.Header className='modal-header-custom' closeButton>
@@ -18,7 +20,7 @@ function ConfirmPurchaseModal({ show, handleClose }) {
                 </Button>
                 <Button className='confirm-button' variant="primary" onClick={() => {
                     handleClose();
-                    // lógica para finalizar la compra
+                    navigate('/mypurchases');
                 }}>
                     Confirmar Compra
                 </Button>

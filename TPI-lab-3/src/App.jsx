@@ -19,7 +19,7 @@ import EditProduct from "./components/admin/EditProducts";
 import AddProduct from "./components/admin/AddProduct";
 import CardData from "./components/paymentMethod/CardData";
 import CreateUser from "./components/sysadmin/AddUser";
-
+import MyPurchases from "./components/myPurchases/MyPurchases";
 // Stlyes
 
 function App() {
@@ -97,6 +97,14 @@ function App() {
       element: (
         <Protected allowedRoles={['Client']}>
           <CardData />
+        </Protected>
+      ),
+    },
+    {
+      path: "/mypurchases", 
+      element: (
+        <Protected allowedRoles={['Client']}>
+          <MyPurchases />
         </Protected>
       ),
     },

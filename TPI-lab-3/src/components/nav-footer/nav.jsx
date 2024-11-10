@@ -13,6 +13,9 @@ const NavBar = ({ setSearchTerm, setSelectedCategory }) => {
     const handlerDashboard = () => {
         navigate('/dashboard');
     }
+    const handlerPurchases = () => {
+        navigate('/mypurchases');
+    }
     return (
         <Navbar expand="lg" className="navbar w-100">
             <Container fluid className="container">
@@ -47,7 +50,7 @@ const NavBar = ({ setSearchTerm, setSelectedCategory }) => {
                         <div className="d-flex justify-content-between align-items-center">
                             <Nav className="flex-grow-1">
                                 <Nav.Link onClick={handlerDashboard}>Inicio</Nav.Link>
-                                <Nav.Link href="#action2">Mis compras</Nav.Link>
+                                <Nav.Link onClick={handlerPurchases}>Mis compras</Nav.Link>
                                 <NavDropdown title="Filtro" id="navbarScrollingDropdown">
                                     <NavDropdown.Item onClick={() => setSelectedCategory("Bebidas")}>Bebidas</NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => setSelectedCategory("Bebidas Alcoholicas")}>Bebidas Alcoholicas</NavDropdown.Item>

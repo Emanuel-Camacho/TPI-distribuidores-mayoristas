@@ -1,0 +1,19 @@
+
+.purchase-row {
+    display: flex;
+    align-items: center;
+    
+    margin-bottom: 1rem;
+}
+
+.purchase-card {
+    flex: 1;
+    max-width: 75%;
+    padding: 1rem;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+}
+

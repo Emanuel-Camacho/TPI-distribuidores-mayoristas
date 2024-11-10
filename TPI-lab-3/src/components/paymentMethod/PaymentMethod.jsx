@@ -9,13 +9,13 @@ import ConfirmPurchaseModal from './ConfirmPurchaseModal';
 const PaymentMethod = () => {
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-
+    const navigate = useNavigate();
     //modal confirmar compra
-    const handleConfirmShow = () => setShowConfirmModal(true);   
+    const handleConfirmShow = () => setShowConfirmModal(true);  
     const handleConfirmClose = () => setShowConfirmModal(false);
 
 
-    const navigate = useNavigate(); 
+
     const handleCardClick = () => {
         navigate('/carddata');
     };
