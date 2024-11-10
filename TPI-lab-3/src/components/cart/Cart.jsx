@@ -36,8 +36,18 @@ const Cart = () => {
                     ? (prevQuantities[productId] || 1) + 1
                     : Math.max((prevQuantities[productId] || 1) - 1, 1)
             };
-            
+
             localStorage.setItem('quantities', JSON.stringify(newQuantities));
+            return newQuantities;
+        });
+    };
+    const handleRemoveFromCart = (productId) => {
+        removeFromCart(productId);
+
+        setQuantities((prevQuantities) => {
+            const newQuantities = { ...prevQuantities };
+            delete newQuantities[productId];
+            localStorage.setItem('quantities', JSON.stringify(newQuantities)); // Actualiza localStorage
             return newQuantities;
         });
     };
@@ -74,47 +84,56 @@ const Cart = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cartItems.map((product) => (
-                                    <tr key={product.productId}>
-                                        <td>
-                                            <Row>
-                                                <Col xs={4}>
-                                                    <img
-                                                        src={product.productImageUrl}
-                                                        alt={product.productName}
-                                                        className="img-fluid"
-                                                    />
-                                                </Col>
-                                                <Col xs={8}>
-                                                    <h5>{product.productName}</h5>
-                                                    <p>{product.productBrand}</p>
-                                                    <p>{product.productDetail}</p>
-                                                </Col>
-                                            </Row>
-                                        </td>
-                                        <td className="price-column"><strong>${product.productPrice.toFixed(2)}</strong></td>
-                                        <td className="quantity-column">
-                                            <InputGroup className='d-flex align-items-center'>
-                                                <Button variant="outline-secondary" onClick={() => handleQuantityChange(product.productId, 'decrement')}>-</Button>
-                                                <FormControl
-                                                    value={quantities[product.productId]}
-                                                    readOnly
-                                                    className='quantity-input'
-                                                    style={{ textAlign: 'center', maxWidth: '70px' }}
-                                                />
-                                                <Button variant="outline-secondary" onClick={() => handleQuantityChange(product.productId, 'increment')}>+</Button>
-                                            </InputGroup>
-                                        </td>
-                                        <td className="subtotal-column"><strong>${(product.productPrice * quantities[product.productId]).toFixed(2)}</strong></td>
-                                        <td>
-                                            <Button variant="link" className="trash-button" onClick={() => removeFromCart(product.productId)}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                                                </svg>
-                                            </Button>
+                                {cartItems.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="4" className='text-center'>
+                                            <p className="display-6">Carrito Vacío</p>
                                         </td>
                                     </tr>
-                                ))}
+                                    ) : (
+                                        cartItems.map((product) => (
+                                            <tr key={product.productId}>
+                                                <td>
+                                                    <Row>
+                                                        <Col xs={4}>
+                                                            <img
+                                                                src={product.productImageUrl}
+                                                                alt={product.productName}
+                                                                className="img-fluid"
+                                                            />
+                                                        </Col>
+                                                        <Col xs={8}>
+                                                            <h5>{product.productName}</h5>
+                                                            <p>{product.productBrand}</p>
+                                                            <p>{product.productDetail}</p>
+                                                        </Col>
+                                                    </Row>
+                                                </td>
+                                                <td className="price-column"><strong>${product.productPrice.toFixed(2)}</strong></td>
+                                                <td className="quantity-column">
+                                                    <InputGroup className='d-flex align-items-center'>
+                                                        <Button variant="outline-secondary" onClick={() => handleQuantityChange(product.productId, 'decrement')}>-</Button>
+                                                        <FormControl
+                                                            value={quantities[product.productId]}
+                                                            readOnly
+                                                            className='quantity-input'
+                                                            style={{ textAlign: 'center', maxWidth: '70px' }}
+                                                        />
+                                                        <Button variant="outline-secondary" onClick={() => handleQuantityChange(product.productId, 'increment')}>+</Button>
+                                                    </InputGroup>
+                                                </td>
+                                                <td className="subtotal-column"><strong>${(product.productPrice * quantities[product.productId]).toFixed(2)}</strong></td>
+                                                <td>
+                                                    <Button variant="link" className="trash-button" onClick={() => handleRemoveFromCart(product.productId)}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                                        </svg>
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    )
+                                }
                             </tbody>
                         </Table>
                     </Col>

@@ -7,11 +7,13 @@ import FooterAdmin from "./nav-footer-admin/FooterAdmin";
 import './Admin.css'
 import { useAuth } from "../../services/auth/Auth.context";
 import ConfirmDeleteProduct from "./ConfirmDeleteProduct";
+import EditProductModal from "./EditProductModal";
 
 
 const Admin = () => {
-    const [products, setProducts] = useState([]);  
+    const [products, setProducts] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -26,12 +28,12 @@ const Admin = () => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
                     },
-                }); 
+                });
                 if (!response.ok) {
                     throw new Error("Error al obtener los productos");
                 }
                 const data = await response.json();
-                setProducts(data); 
+                setProducts(data);
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -56,8 +58,9 @@ const Admin = () => {
         window.location.reload();
     };
 
-    const handleCardClick = (productId) => {
-        navigate(`/edit/${productId}`);
+    const handleCardClick = (product) => {
+        setSelectedProduct(product);
+        setShowEditModal(true);
     };
 
     const handleAddProduct = () => {
@@ -72,7 +75,7 @@ const Admin = () => {
                     'Authorization': `Bearer ${token}`,
                 },
             });
-    
+
             if (response.ok) {
                 alert(`Producto eliminado: ${selectedProduct.productName}`);
             } else {
@@ -84,7 +87,7 @@ const Admin = () => {
     };
     return (
         <>
-            <NavAdmin  setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
+            <NavAdmin setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
             <h1 className="mt-3 mb-3">PAGINA ADMIN</h1>
             <div className="card-list">
                 <Card className="card-container new-product-card">
@@ -107,24 +110,35 @@ const Admin = () => {
                             <Card.Subtitle>{product.productName}</Card.Subtitle>
                             <Card.Title>${product.productPrice}</Card.Title>
                             <Card.Text>{product.productBrand}</Card.Text>
-                            <Button variant="dark" onClick={() => handleCardClick(product.id)}>Editar producto</Button>
                             <Button 
-                                variant="danger" 
+                                className="mb-3" 
+                                variant="dark" 
+                                onClick={() => handleCardClick(product)}>
+                                Editar producto
+                            </Button>
+                            <Button
+                                variant="danger"
                                 onClick={() => handleShowModal(product)}>
-                                    Eliminar producto
+                                Eliminar producto
                             </Button>
                         </Card.Body>
                     </Card>
                 ))}
-                {selectedProduct&& (
-                <>
-                    <ConfirmDeleteProduct
-                        show={showModal}
-                        handleClose={handleCloseModal}
-                        handleConfirmDelete={handleConfirmDelete}
-                        productName={selectedProduct.productName}
-                    />
-                </>
+                {selectedProduct && (
+                    <>
+                        <ConfirmDeleteProduct
+                            show={showModal}
+                            handleClose={handleCloseModal}
+                            handleConfirmDelete={handleConfirmDelete}
+                            productName={selectedProduct.productName}
+                        />
+                        <EditProductModal
+                            show={showEditModal}
+                            handleClose={() => setShowEditModal(false)}
+                            product={selectedProduct}
+                            token={token}
+                        />
+                    </>
                 )}
             </div>
             <FooterAdmin />
