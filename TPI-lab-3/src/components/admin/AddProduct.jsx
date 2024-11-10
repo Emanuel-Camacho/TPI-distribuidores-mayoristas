@@ -4,22 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
 import'./AddProduct.css';
+import { useAuth } from "../../services/auth/Auth.context";
 
-const AddProduct = ({ addProduct }) => {
+const AddProduct = () => {
     const [productName, setProductName] = useState('');
     const [productBrand, setProductBrand] = useState('');
     const [productDetail, setProductDetail] = useState('');
     const [productPrice, setProductPrice] = useState('');
-    const [productImage, setProductImage] = useState('');
-    const [category, setCategory] = useState('Bebidas');
+    const [productImageUrl, setProductImageUrl] = useState('');
+    const [productCategory, setProductCategory] = useState('Bebidas');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const { token } = useAuth();
+
+    
 
     const handleOpenConfirmModal = (e) => {
         e.preventDefault();
 
-        if (!productName || !productBrand || !productDetail || !productPrice || !category) {
+        if (!productName || !productBrand || !productDetail || !productPrice || !productCategory) {
             alert('Por favor, complete todos los campos requeridos.');
             return; 
         }
@@ -35,25 +39,46 @@ const AddProduct = ({ addProduct }) => {
         navigate('/admin');
     }
 
-    const handleConfirmSubmit = () => {
-        const maxId = Math.max(...products.map((prod) => prod.id), 0);
+    const handleConfirmSubmit = async () => {
         const newProduct = {
-            id: maxId + 1,
-            productName,
-            productBrand,
-            productDetail,
-            productPrice,
-            productImage,
-            category,
+            productName: productName,
+            productBrand: productBrand,
+            productDetail: productDetail,
+            productPrice: productPrice,
+            productImageUrl: productImageUrl || "",
+            productCategory: productCategory,
         };
-        setShowConfirmModal(false);
-        //addProduct(newProduct); //logica para agregar nuevo producto
-        setProductName('');
-        setProductBrand('');
-        setProductDetail('');
-        setProductPrice('');
-        setProductImage('');
-        setCategory('Bebidas');
+        try {
+            const response = await fetch('https://localhost:7121/api/Product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(newProduct),
+            });
+
+            if (!response.ok) {
+                // Captura el mensaje de error del servidor para saber exactamente la causa
+                const errorData = await response.json(); 
+                throw new Error(errorData.message || 'Error al crear el producto');
+            }
+
+            setShowConfirmModal(false);
+            alert('Producto creado exitosamente.');
+            
+            setProductName('');
+            setProductBrand('');
+            setProductDetail('');
+            setProductPrice('');
+            setProductImageUrl('');
+            setProductCategory('Bebidas');
+            navigate('/admin');
+        } catch (error) {
+            console.error(error);
+            setErrorMessage('Hubo un problema al crear el producto. Intente nuevamente.');
+        }
+    
     };
 
     return (
@@ -106,8 +131,8 @@ const AddProduct = ({ addProduct }) => {
                         <Form.Label>URL de la Imagen</Form.Label>
                         <Form.Control
                             type="text"
-                            value={productImage}
-                            onChange={(e) => setProductImage(e.target.value)}
+                            value={productImageUrl}
+                            onChange={(e) => setProductImageUrl(e.target.value)}
                             className="input-custom"
                         />
                     </Form.Group>
@@ -115,8 +140,8 @@ const AddProduct = ({ addProduct }) => {
                         <Form.Label>Categoría</Form.Label>
                         <Form.Control
                             as="select"
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
+                            value={productCategory}
+                            onChange={(e) => setProductCategory(e.target.value)}
                             className="input-custom"
                             required
                         >
