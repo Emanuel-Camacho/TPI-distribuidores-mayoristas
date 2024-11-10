@@ -43,14 +43,14 @@ const Dashboard = () => {
             <div className="card-list mt-5">
                 {products.map((product) => (
                     <ProductCard
-                        key={product.id}
-                        id={product.id}
+                        key={product.productId}
+                        productId={product.productId}
                         productName={product.productName}
                         productBrand={product.productBrand}
                         productDetail={product.productDetail}
                         productPrice={product.productPrice}
                         productImageUrl={product.productImageUrl}
-                        onClick={() => handleCardClick(product.id)}
+                        onClick={() => handleCardClick(product.productId)}
                     />
                 ))}
             </div>

@@ -8,7 +8,7 @@ const ProductCard = ({ productName = "Producto sin nombre",
     productBrand = "Marca desconocida", 
     productPrice = "0.00", 
     productImageUrl = "", 
-    id = -1 }) => {
+    productId = -1 }) => {
     const placeholderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmNILEZppKJCs1LHgBaUGbbFzQJsv6b5bt-w&s";
     const navigate = useNavigate();
     const { addToCart } = useCart(); 
@@ -18,7 +18,7 @@ const ProductCard = ({ productName = "Producto sin nombre",
     };
 
     return (
-        <Card className="card-container" key={id}>
+        <Card className="card-container" key={productId}>
             <Card.Img
                 className="card-image"
                 src={productImageUrl !== "" ? productImageUrl : placeholderImage}
@@ -30,11 +30,11 @@ const ProductCard = ({ productName = "Producto sin nombre",
                 <Card.Text>{productBrand}</Card.Text>
                 <Button
                     variant="success"
-                    onClick={() => addToCart({ id, productName, productBrand, productPrice, productImageUrl })}
+                    onClick={() => addToCart({ productId, productName, productBrand, productPrice, productImageUrl })}
                 >
                     Añadir
                 </Button>
-                <Button onClick={() => handleCardClick(id)}>Ver producto</Button>
+                <Button onClick={() => handleCardClick(productId)}>Ver producto</Button>
             </Card.Body>
         </Card>
     );

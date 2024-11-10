@@ -89,7 +89,7 @@ const Admin = () => {
                     </Button>
                 </Card>
                 {products.map((product) => (
-                    <Card className="card-container" key={product.id}>
+                    <Card className="card-container" key={product.productId}>
                         <Card.Img
                             className="card-image"
                             src={product.productImageUrl !== "" ? product.productImageUrl : placeholderImage}

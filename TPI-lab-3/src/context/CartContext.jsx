@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = (product) => {
         setCartItems((prevItems) => {
-            const isProductInCart = prevItems.some((item) => item.id === product.id);
+            const isProductInCart = prevItems.some((item) => item.productId === product.productId);
             if (!isProductInCart) {
                 return [...prevItems, { ...product }];
             } else {
@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
     };
 
     const removeFromCart = (productId) => {
-        setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+        setCartItems((prevItems) => prevItems.filter((item) => item.productId !== productId));
     };
 
     return (
