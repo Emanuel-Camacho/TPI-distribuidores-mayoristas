@@ -4,6 +4,8 @@ import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
 import NavBar from "../nav-footer/nav";
 import Footer from "../nav-footer/footer";
 import EditProductModal from './EditProductModal';
+import FooterAdmin from './nav-footer-admin/FooterAdmin';
+import NavAdmin from './nav-footer-admin/NavAdmin';
 
 
 const EditProduct = () => {
@@ -16,7 +18,7 @@ const EditProduct = () => {
 
     return (
         <>
-            <NavBar/>
+            <NavAdmin/>
             <Container className="my-5">
                 <Row>
                 <Col md={6} className="text-center">
@@ -40,7 +42,7 @@ const EditProduct = () => {
                     </Col>
                 </Row>
             </Container>
-        <Footer/>
+        <FooterAdmin/>
         </>
     );
 };

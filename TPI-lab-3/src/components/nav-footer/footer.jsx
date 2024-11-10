@@ -8,7 +8,7 @@ const Footer = () => {
         navigate ('/cart');
     }
     const handlerDashboard = () => {
-        navigate ('/');
+        navigate ('/dashboard');
     }
     return (
         <div className="footer w-100 fixed-bottom overflow-hidden position-relative">

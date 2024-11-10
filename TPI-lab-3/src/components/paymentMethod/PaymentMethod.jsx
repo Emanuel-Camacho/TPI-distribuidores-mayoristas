@@ -20,7 +20,7 @@ const PaymentMethod = () => {
         navigate('/carddata');
     };
     const handlerDashboard = () => {
-        navigate('/');
+        navigate('/dashboard');
     }
 
 

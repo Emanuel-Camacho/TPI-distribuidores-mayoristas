@@ -1,7 +1,7 @@
 // Libraries
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { AuthenticationProvider } from "./services/auth/Auth.context";
 // Helpers
 
@@ -27,6 +27,10 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Navigate to="/login" />,
+    },
+    {
+      path: "/dashboard",
       element: (
         <Protected allowedRoles={['Client']}>
           <Dashboard />

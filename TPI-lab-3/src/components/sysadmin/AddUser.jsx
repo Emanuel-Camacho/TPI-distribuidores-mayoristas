@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Modal } from 'react-bootstrap';
 import './AddUser.css';
 import { useAuth } from '../../services/auth/Auth.context';
+import NavSysAdmin from './nav-footer-sysadmin/NavSysAdmin';
+import FooterSysAdmin from './nav-footer-sysadmin/FooterSysAdmin';
 
 const CreateUser = () => {
     const [username, setUsername] = useState('');
@@ -75,7 +77,7 @@ const CreateUser = () => {
 
     return (
         <>
-            
+            <NavSysAdmin />
             <Container className="createuser-form-container mt-5 mb-5 p-4 bg-light form-container">
                 <h2>Crear Nuevo Usuario</h2>
                 <Form onSubmit={handleOpenConfirmModal}>
@@ -159,6 +161,7 @@ const CreateUser = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <FooterSysAdmin/>
         </>
     );
 };

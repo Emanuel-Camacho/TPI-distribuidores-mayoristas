@@ -1,0 +1,19 @@
+.navbar {
+    background-color: lightskyblue;
+}
+
+.container {
+    max-width: 2000px; 
+    margin: 10px auto;
+}
+
+.nombre-logo {
+    flex: 1;
+}
+.nombre-logo:hover {
+    cursor: pointer;
+}
+
+.logo-img {
+    width: 120px;
+}

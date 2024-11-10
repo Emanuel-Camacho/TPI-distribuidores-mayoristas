@@ -75,7 +75,7 @@ const Login = ({ onLogin }) => {
             handleLogin(userEmail, userType, id, token);
             
             if (userType === "Client") {
-                navigate("/");
+                navigate("/dashboard");
             } else if (userType === "Admin") {
                 navigate("/admin");
             } else if (userType === "SysAdmin") {

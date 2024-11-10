@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Modal, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../nav-footer/nav';
-import Footer from '../nav-footer/footer';
+import NavAdmin from './nav-footer-admin/NavAdmin';
+import FooterAdmin from './nav-footer-admin/FooterAdmin';
 import'./AddProduct.css';
 import { useAuth } from "../../services/auth/Auth.context";
 
@@ -83,7 +83,7 @@ const AddProduct = () => {
 
     return (
         <>
-            <NavBar />
+            <NavAdmin />
             <Container className="addproduct-form-container mt-5 mb-5 p-4 bg-light form-container">
                 <h2>Crear Nuevo Producto</h2>
                 <Form onSubmit={handleOpenConfirmModal}>
@@ -159,7 +159,7 @@ const AddProduct = () => {
                     </div>
                 </Form>
             </Container>
-            <Footer />
+            <FooterAdmin />
 
             <Modal show={showConfirmModal} onHide={handleCloseConfirmModal} backdrop="static" keyboard={false} centered className='modal-addproduct'>
                 <Modal.Header closeButton className='modal-header-custom'>

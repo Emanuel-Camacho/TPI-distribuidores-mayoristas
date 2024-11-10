@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Card, Button } from "react-bootstrap";
-import NavBar from "../nav-footer/nav";
-import Footer from "../nav-footer/footer";
+import NavAdmin from "./nav-footer-admin/NavAdmin";
+import FooterAdmin from "./nav-footer-admin/FooterAdmin";
 import './Admin.css'
 import { useAuth } from "../../services/auth/Auth.context";
 import ConfirmDeleteProduct from "./ConfirmDeleteProduct";
@@ -13,6 +13,8 @@ const Admin = () => {
     const [products, setProducts] = useState([]);  
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
     const { token } = useAuth();
 
@@ -37,6 +39,12 @@ const Admin = () => {
         fetchProducts();
     }, []);
     const placeholderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmNILEZppKJCs1LHgBaUGbbFzQJsv6b5bt-w&s";
+
+    const filteredProducts = products.filter((product) => {
+        const matchesSearch = product.productName.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = selectedCategory ? product.productCategory === selectedCategory : true;
+        return matchesSearch && matchesCategory;
+    });
 
     const handleShowModal = (product) => {
         setSelectedProduct(product);
@@ -76,8 +84,8 @@ const Admin = () => {
     };
     return (
         <>
-            <NavBar />
-            <p>PAGINA ADMIN</p>
+            <NavAdmin  setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
+            <h1 className="mt-3 mb-3">PAGINA ADMIN</h1>
             <div className="card-list">
                 <Card className="card-container new-product-card">
                     <Button variant="light" className="new-product-button" onClick={handleAddProduct}>
@@ -88,7 +96,7 @@ const Admin = () => {
                         <p className="new-product-text">Añadir Producto</p>
                     </Button>
                 </Card>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <Card className="card-container" key={product.productId}>
                         <Card.Img
                             className="card-image"
@@ -119,7 +127,7 @@ const Admin = () => {
                 </>
                 )}
             </div>
-            <Footer />
+            <FooterAdmin />
         </>
     );
 };

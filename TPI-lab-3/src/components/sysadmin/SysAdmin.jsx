@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import './SysAdmin.css';
-import NavBar from '../nav-footer/nav';
-import Footer from '../nav-footer/footer';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
 import EditUserModal from './EditUserModal';
 import { useAuth } from '../../services/auth/Auth.context';
+import FooterSysAdmin from './nav-footer-sysadmin/FooterSysAdmin';
+import NavSysAdmin from './nav-footer-sysadmin/NavSysAdmin';
 
 const SysAdmin = () => {
 
@@ -88,7 +88,8 @@ const SysAdmin = () => {
 
     return (
         <>
-            <NavBar />
+            <NavSysAdmin />
+            <h1 className='mt-3 mb-3'>PAGINA SYSADMIN</h1>
             <div className="admin-table-container">
                 <h3 className="table-title">Usuarios</h3>
                 <Button variant="primary" className="create-user-btn" onClick={handleAddUser}>
@@ -152,7 +153,7 @@ const SysAdmin = () => {
                 </>
                 )}
             </div>
-            <Footer />
+            <FooterSysAdmin />
         </>
     );
 };

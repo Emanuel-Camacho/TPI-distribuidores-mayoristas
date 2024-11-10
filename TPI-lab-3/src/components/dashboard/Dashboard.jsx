@@ -9,6 +9,8 @@ import { useAuth } from "../../services/auth/Auth.context";
 
 const Dashboard = () => {
     const [products, setProducts] = useState([]);  
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
     const { token } = useAuth();
 
@@ -33,15 +35,21 @@ const Dashboard = () => {
         fetchProducts();
     }, []);
 
+    const filteredProducts = products.filter((product) => {
+        const matchesSearch = product.productName.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = selectedCategory ? product.productCategory === selectedCategory : true;
+        return matchesSearch && matchesCategory;
+    });
+
     const handleCardClick = (productId) => {
         navigate(`/product/${productId}`);
     };
 
     return (
         <>
-            <NavBar/>
+            <NavBar setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
             <div className="card-list mt-5">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <ProductCard
                         key={product.productId}
                         productId={product.productId}

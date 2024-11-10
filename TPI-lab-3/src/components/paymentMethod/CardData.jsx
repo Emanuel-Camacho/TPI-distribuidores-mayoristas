@@ -28,7 +28,7 @@ function CardData() {
         navigate('/paymentmethod');
     };
     const handlerDashboard = () => {
-        navigate('/');
+        navigate('/dashboard');
     }
     const handleSubmit = (event) => {
         event.preventDefault();
