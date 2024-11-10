@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table, Button, FormControl, InputGroup, Card } from 'react-bootstrap';
 import './Cart.css';
 import { useCart } from '../../context/CartContext';
@@ -11,13 +11,15 @@ const Cart = () => {
     const shippingCost = 5000;
     const navigate = useNavigate();
 
-    const [quantities, setQuantities] = useState(
-        cartItems.reduce((acc, product) => ({ ...acc, [product.productId]: 1 }), {})
-    );
+    const [quantities, setQuantities] = useState(() => {
+        const savedQuantities = localStorage.getItem('quantities');
+        return savedQuantities
+            ? JSON.parse(savedQuantities)
+            : cartItems.reduce((acc, product) => ({ ...acc, [product.productId]: 1 }), {});
+    });
 
     const totalPrice = cartItems.reduce((acc, product) => acc + product.productPrice * quantities[product.productId], 0);
 
-    // Nueva función para verificar el carrito y navegar
     const handlePaymentMethod = () => {
         if (cartItems.length === 0) {
             alert("Tu carrito está vacío. Por favor, añade productos antes de proceder a la compra.");
@@ -27,13 +29,32 @@ const Cart = () => {
     };
 
     const handleQuantityChange = (productId, type) => {
-        setQuantities((prevQuantities) => ({
-            ...prevQuantities,
-            [productId]: type === 'increment'
-                ? prevQuantities[productId] + 1
-                : Math.max(prevQuantities[productId] - 1, 1)
-        }));
+        setQuantities((prevQuantities) => {
+            const newQuantities = {
+                ...prevQuantities,
+                [productId]: type === 'increment'
+                    ? (prevQuantities[productId] || 1) + 1
+                    : Math.max((prevQuantities[productId] || 1) - 1, 1)
+            };
+            
+            localStorage.setItem('quantities', JSON.stringify(newQuantities));
+            return newQuantities;
+        });
     };
+
+    useEffect(() => {
+        setQuantities((prevQuantities) => {
+            const savedQuantities = localStorage.getItem('quantities');
+            const parsedQuantities = savedQuantities ? JSON.parse(savedQuantities) : {};
+            return {
+                ...cartItems.reduce((acc, product) => ({
+                    ...acc,
+                    [product.productId]: parsedQuantities[product.productId] || 1
+                }), {}),
+                ...prevQuantities
+            };
+        });
+    }, [cartItems]);
 
     return (
         <>
@@ -102,11 +123,7 @@ const Cart = () => {
                     <Col md={4}>
                         <Card className="p-6 p-md-12 bg-black text-white">
                             <Card.Body>
-                                <Card.Title>Total carrito</Card.Title>
-                                <Row className="my-3">
-                                    <Col>Subtotal</Col>
-                                    <Col className="text-end">${totalPrice.toFixed(2)}</Col>
-                                </Row>
+                                <Card.Title>Carrito</Card.Title>
                                 <Row className="my-3">
                                     <Col>Total</Col>
                                     <Col className="text-end">

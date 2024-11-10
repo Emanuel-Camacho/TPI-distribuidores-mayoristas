@@ -11,7 +11,6 @@ import Register from "./components/register/Register"; // autocompleta minuscula
 import NotFound from "./components/notFound/NotFound";
 import Protected from "./components/protected/Protected";
 import Dashboard from "./components/dashboard/Dashboard";
-import SingleProduct from "./components/singleProduct/SingleProduct";
 import Cart from "./components/cart/Cart";
 import PaymentMethod from "./components/paymentMethod/PaymentMethod";
 import Admin from "./components/admin/Admin";
@@ -58,14 +57,6 @@ function App() {
       element: (
         <Protected allowedRoles={['SysAdmin']}>
           <CreateUser />
-        </Protected>
-      ),
-    },
-    {
-      path: "/product/:id",
-      element: (
-        <Protected allowedRoles={['Client']}>
-          <SingleProduct />
         </Protected>
       ),
     },
