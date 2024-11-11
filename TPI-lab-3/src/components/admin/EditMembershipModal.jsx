@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const EditMembershipModal = ({ show, handleClose, token }) => {
-    const [membershipTitle, setMembershipTitle] = useState("");
-    const [membershipDescription, setMembershipDescription] = useState("");
+    const [membershipTitle, setMembershipTitle] = useState("Membresia");
+    const [membershipDescription, setMembershipDescription] = useState("Descripcion");
     const [membershipPrice, setMembershipPrice] = useState(50000);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [loading, setLoading] = useState(true);

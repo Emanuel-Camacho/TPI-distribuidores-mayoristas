@@ -8,7 +8,7 @@ function ConfirmDeleteModal({ show, handleClose, handleConfirmDelete, userName }
             <Modal.Header className='modal-header-custom' closeButton>
                 <Modal.Title>Confirmar Eliminación</Modal.Title>
             </Modal.Header>
-            <Modal.Body className='modal-body-custom'>
+            <Modal.Body className='modal-body-custom text-white'>
                 ¿Estás seguro de que deseas eliminar a {userName}?
             </Modal.Body>
             <Modal.Footer className='modal-footer-custom'>
