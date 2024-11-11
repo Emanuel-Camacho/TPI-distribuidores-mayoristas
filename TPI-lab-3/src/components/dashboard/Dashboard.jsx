@@ -55,9 +55,9 @@ const Dashboard = () => {
             <Button 
                 variant="success" 
                 onClick={handleMembershipClick}
-                className="my-3"
+                className="ms-auto my-3 "
                 >
-                Adquirir una Membresia
+                Adquirir Membresia
             </Button>
             <div className="card-list mt-5">
                 {filteredProducts.map((product) => (

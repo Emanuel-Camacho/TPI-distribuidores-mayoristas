@@ -2,7 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { Button, Card, Modal, Row, Col, Form, Container } from "react-bootstrap";
 import { useAuth } from "../../services/auth/Auth.context";
 import { useNavigate } from "react-router-dom";
-
+import "./Membership.css";
+import NavBar from "../nav-footer/nav";
+import Footer from "../nav-footer/footer";
 const Membership = () => {
     const { token, user } = useAuth();
     const navigate = useNavigate();
@@ -119,7 +121,8 @@ const Membership = () => {
 
     return (
         <>
-            <Card style={{ width: "60rem" }} className="shadow-lg">
+            <NavBar />
+            <Card className="centered-card shadow-lg mb-5">
                 <Card.Body>
                     <Card.Title className="text-center mb-4" style={{ fontSize: "2rem" }}>
                         {membershipTitle}
@@ -155,15 +158,15 @@ const Membership = () => {
             </Card>
 
             <Modal show={showPaymentForm} onHide={() => setShowPaymentForm(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Pago con Tarjeta</Modal.Title>
+                <Modal.Header closeButton className="modal-header-custom">
+                    <Modal.Title  className="modal-title-custom">Pago con Tarjeta</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Container className="payment-form-container mt-5 mb-5 p-4 bg-light form-container">
-                        <h2 className="text-center">Ingrese sus Datos</h2>
-                        <Form onSubmit={handlePaymentSubmit}>
-                            <Form.Group controlId="formCardHolder" className="mb-3">
-                                <Form.Label>Nombre del titular</Form.Label>
+                <Modal.Body className="modal-body-custom">
+                    <Container className="payment-form-container mt-5 mb-5 p-4">
+                        <h2 className="text-center title-custom">Ingrese sus Datos</h2>
+                        <Form onSubmit={handlePaymentSubmit} >
+                            <Form.Group controlId="formCardHolder" className="mb-4">
+                                <Form.Label className="label-custom">Nombre del titular</Form.Label>
                                 <Form.Control
                                     type="text"
                                     className="input-custom"
@@ -174,7 +177,7 @@ const Membership = () => {
                                 />
                             </Form.Group>
                             <Form.Group controlId="formCardNumber" className="mb-3">
-                                <Form.Label>Número de tarjeta</Form.Label>
+                                <Form.Label className="label-custom">Número de tarjeta</Form.Label>
                                 <Form.Control
                                     type="text"
                                     className="input-custom"
@@ -186,7 +189,7 @@ const Membership = () => {
                             </Form.Group>
                             <Form.Group controlId="formExpirationAndCVV" className="d-flex mb-3">
                                 <div className="me-3">
-                                    <Form.Label>VTO</Form.Label>
+                                    <Form.Label className="label-custom">VTO</Form.Label>
                                     <Form.Control
                                         type="text"
                                         className="input-custom"
@@ -197,7 +200,7 @@ const Membership = () => {
                                     />
                                 </div>
                                 <div>
-                                    <Form.Label>CVV</Form.Label>
+                                    <Form.Label className="label-custom">CVV</Form.Label>
                                     <Form.Control
                                         type="password"
                                         className="input-custom"
@@ -209,7 +212,7 @@ const Membership = () => {
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="formDNI" className="mb-3">
-                                <Form.Label>DNI</Form.Label>
+                                <Form.Label className="label-custom">DNI</Form.Label>
                                 <Form.Control
                                     type="text"
                                     className="input-custom"
@@ -219,8 +222,8 @@ const Membership = () => {
                                     onChange={(e) => setDni(e.target.value)}
                                 />
                             </Form.Group>
-                            <h4>Tipo de Tarjeta</h4>
-                            <Form.Group>
+                            <h4 className="label-custom">Tipo de Tarjeta</h4>
+                            <Form.Group className="d-flex align-items-center gap-3">
                                 <Form.Check
                                     type="radio"
                                     id="creditCard"
@@ -254,28 +257,28 @@ const Membership = () => {
                 </Modal.Body>
             </Modal>
 
-            <Modal show={showSubscribeModal} onHide={() => setShowSubscribeModal(false)}>
-                <Modal.Header closeButton>
+            <Modal show={showSubscribeModal} onHide={() => setShowSubscribeModal(false)} backdrop="static" keyboard={false} centered>
+                <Modal.Header closeButton className="modal-header-custom">
                     <Modal.Title>Confirmar Suscripción</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="text-white" >
                     ¿Estás seguro de que quieres suscribirte a la membresía premium?
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowSubscribeModal(false)}>
+                    <Button variant="secondary" className="modal-footer-secondary" onClick={() => setShowSubscribeModal(false)}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleSubscribe}>
+                    <Button variant="primary" className="modal-footer-button" onClick={handleSubscribe}>
                         Confirmar
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={showUnsubscribeModal} onHide={() => setShowUnsubscribeModal(false)}>
-                <Modal.Header closeButton>
+            <Modal show={showUnsubscribeModal} onHide={() => setShowUnsubscribeModal(false)} centered>
+                <Modal.Header closeButton className="modal-header-custom">
                     <Modal.Title>Cancelar Membresía</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="modal-body-custom text-white">
                     ¿Estás seguro de que quieres cancelar tu membresía premium?
                 </Modal.Body>
                 <Modal.Footer>
@@ -287,6 +290,7 @@ const Membership = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <Footer />
         </>
     );
 };

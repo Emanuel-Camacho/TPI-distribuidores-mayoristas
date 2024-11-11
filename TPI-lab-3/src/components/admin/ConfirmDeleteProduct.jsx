@@ -8,7 +8,7 @@ function ConfirmDeleteProduct({ show, handleClose, handleConfirmDelete, productN
             <Modal.Header className='modal-header-custom' closeButton>
                 <Modal.Title>Confirmar Eliminación</Modal.Title>
             </Modal.Header>
-            <Modal.Body className='modal-body-custom'>
+            <Modal.Body className='modal-body-custom text-white'>
                 ¿Estás seguro de que deseas eliminar {productName}?
             </Modal.Body>
             <Modal.Footer className='modal-footer-custom'>

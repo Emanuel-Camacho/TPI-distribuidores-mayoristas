@@ -1,0 +1,66 @@
+.centered-card {
+    width: 60rem;
+    margin-top: 6rem;
+}
+
+.shadow-lg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-form-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+.label-custom {
+    color: #ffffff; 
+    font-weight: 600;
+}
+
+.modal-title-custom {
+    color: #000;
+    font-weight: bold;
+}
+
+.input-custom {
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+}
+
+.cancel-button {
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.confirm-button {
+    background-color: #28a745;
+    color: white;
+}
+
+
+.modal-header-custom {
+    background-color: #bebebe;
+    color: black;
+}
+
+.modal-body-custom {
+    color: white;
+    background-color: black;
+}
+
+
+.modal-body-custom, .modal-title-custom {
+    color: #000000;
+}
+
+.modal-footer-button {
+    color: white;
+    background-color: #dc3545;
+}
+
+.modal-footer-secondary {
+    color: white;
+    background-color: #6c757d;
+}

@@ -11,7 +11,7 @@ function ConfirmPurchaseModal({ show, handleClose }) {
             <Modal.Header className='modal-header-custom' closeButton>
                 <Modal.Title>Confirmación de compra</Modal.Title>
             </Modal.Header>
-            <Modal.Body className='modal-body-custom'>
+            <Modal.Body className='modal-body-custom text-white'>
                 ¿Estás seguro de realizar la compra?
             </Modal.Body>
             <Modal.Footer className='modal-footer-custom'>

@@ -103,7 +103,7 @@ function App() {
       ),
     },
     {
-      path: "/mypurchase", 
+      path: "/mypurchases", 
       element: (
         <Protected allowedRoles={['Client']}>
           <MyPurchases />

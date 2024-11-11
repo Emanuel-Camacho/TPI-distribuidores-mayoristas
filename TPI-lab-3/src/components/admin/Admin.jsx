@@ -120,8 +120,8 @@ const Admin = () => {
                 <h1 className="mt-3 mb-3">PAGINA ADMIN</h1>
                 
             </div>
-            <Button variant="primary" className="ms-auto" onClick={handleEditMembershipClick}>
-                    Editar Membresía
+            <Button variant="success" className="ms-auto mt-2 mb-4" onClick={handleEditMembershipClick}>
+                Editar Membresía
             </Button>
             <div className="card-list">
                 <Card className="card-container new-product-card">

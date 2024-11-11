@@ -2,41 +2,48 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const EditMembershipModal = ({ show, handleClose, token }) => {
-    const [membershipDetails, setMembershipDetails] = useState({
-        title: "",
-        price: "",
-        description: "",
-    });
+    const [membershipTitle, setMembershipTitle] = useState("");
+    const [membershipDescription, setMembershipDescription] = useState("");
+    const [membershipPrice, setMembershipPrice] = useState("");
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     useEffect(() => {
+
         const fetchMembershipDetails = async () => {
             try {
-                const response = await fetch("https://localhost:7121/api/DateMembership/details", {
+                const response = await fetch(`https://localhost:7121/api/DateMembership/details`, {
+                    method: "GET",
                     headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
+                        "Authorization": `Bearer ${token}`,
                     },
                 });
+
                 if (response.ok) {
                     const data = await response.json();
-                    setMembershipDetails(data);
+                    setMembershipTitle(data.membershipTitle);
+                    setMembershipDescription(data.membershipDescription);
+                    setMembershipPrice(data.membershipPrice);
                 } else {
-                    console.error("Error al obtener los detalles de la membresía.");
+                    throw new Error("Error al obtener los detalles de la membresía.");
                 }
             } catch (error) {
                 console.error("Error:", error);
+                setError("Hubo un problema al obtener los detalles de la membresía.");
             }
         };
 
-        if (show) {
-            fetchMembershipDetails();
-        }
-    }, [show, token]);
+        fetchMembershipDetails();
+    }, [token, show]);
 
-    const handleChange = (e) => {
-        setMembershipDetails({ ...membershipDetails, [e.target.name]: e.target.value });
+    const handleChangePrice = (e) => {
+        setMembershipPrice(e.target.value);
     };
+    const handleChangeTitle = (e) => {
+        setMembershipTitle(e.target.value);
+    };
+    const handleChangeDescription = (e) => {
+        setMembershipDescription(e.target.value);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,14 +51,19 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
     };
 
     const handleConfirmUpdate = async () => {
+        const updatedMembership ={
+            membershipPrice: membershipPrice,
+            membershipTitle: membershipTitle,
+            membershipDescription: membershipDescription,
+        }
         try {
             const response = await fetch("https://localhost:7121/api/DateMembership/update", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    'Authorization' : `Bearer ${token}`,
                 },
-                body: JSON.stringify(membershipDetails),
+                body: JSON.stringify(updatedMembership),
             });
             if (response.ok) {
                 alert("Membresía actualizada correctamente.");
@@ -68,18 +80,18 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
     return (
         <>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header className="bg-light" closeButton>
                     <Modal.Title>Editar Membresía</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="text-white">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formTitle" className="mb-3">
                             <Form.Label>Título</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="title"
-                                value={membershipDetails.title}
-                                onChange={handleChange}
+                                value={membershipTitle}
+                                onChange={handleChangeTitle}
                                 required
                             />
                         </Form.Group>
@@ -88,8 +100,8 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
                             <Form.Control
                                 type="number"
                                 name="price"
-                                value={membershipDetails.price}
-                                onChange={handleChange}
+                                value={membershipPrice}
+                                onChange={handleChangePrice}
                                 required
                             />
                         </Form.Group>
@@ -99,8 +111,8 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
                                 as="textarea"
                                 rows={3}
                                 name="description"
-                                value={membershipDetails.description}
-                                onChange={handleChange}
+                                value={membershipDescription}
+                                onChange={handleChangeDescription}
                                 required
                             />
                         </Form.Group>
@@ -111,11 +123,11 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
                 </Modal.Body>
             </Modal>
 
-            <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
+            <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false) }  backdrop="static" keyboard={false} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirmación</Modal.Title>
+                    <Modal.Title className="text-white">Confirmación</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>¿Estás seguro de que deseas actualizar la membresía?</Modal.Body>
+                <Modal.Body className="text-white">¿Estás seguro de que deseas actualizar la membresía?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
                         Cancelar

@@ -51,7 +51,7 @@ function CardData() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>           
-            <Container className="payment-form-container mt-5 mb-5 p-4 bg-light form-container">
+            <Container className=" mt-5 mb-5 p-4 bg-light form-container">
                 <h2 className="text-center">Pago con Tarjeta</h2>
                 <h4>Ingrese sus Datos</h4>
                 <Form onSubmit={handleSubmit}>

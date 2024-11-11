@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useDarkMode from "../../../custom/UseDarkMode";
 
 const NavSysAdmin = ({ setSearchTerm, setSelectedCategory }) => {
-    const [isDarkMode, toggleDarkMode] = useDarkMode(); 
+    const [isDarkMode, toggleDarkMode] = useDarkMode();
     const navigate = useNavigate();
     const handleLogout = () => {
         navigate("/login");
@@ -22,21 +22,22 @@ const NavSysAdmin = ({ setSearchTerm, setSelectedCategory }) => {
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <div className="d-flex flex-column w-100">
-                        <div className="d-flex justify-content-center align-items-center mb-2">
+                        <div className="d-flex align-items-center ms-auto">
                             <Button className="d-flex align-items-center ms-auto" onClick={handleLogout} >Cerrar sesión</Button>
+                            <Button
+                                variant="link"
+                                onClick={toggleDarkMode}
+                                className="ms-auto my-3 dark-mode-button"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-brilliance" viewBox="0 0 16 16">
+                                    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7" />
+                                </svg>
+                            </Button>
                         </div>
                     </div>
                 </Navbar.Collapse>
             </Container>
-            <Button
-                variant="link"  
-                onClick={toggleDarkMode} 
-                className="ms-auto my-3"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-brilliance" viewBox="0 0 16 16">
-                    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7"/>
-                </svg>
-            </Button>
+
         </Navbar>
     );
 }
