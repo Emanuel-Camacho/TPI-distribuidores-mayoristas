@@ -4,36 +4,10 @@ import { Modal, Button, Form } from "react-bootstrap";
 const EditMembershipModal = ({ show, handleClose, token }) => {
     const [membershipTitle, setMembershipTitle] = useState("");
     const [membershipDescription, setMembershipDescription] = useState("");
-    const [membershipPrice, setMembershipPrice] = useState("");
+    const [membershipPrice, setMembershipPrice] = useState(50000);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-
-        const fetchMembershipDetails = async () => {
-            try {
-                const response = await fetch(`https://localhost:7121/api/DateMembership/details`, {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                    },
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    setMembershipTitle(data.membershipTitle);
-                    setMembershipDescription(data.membershipDescription);
-                    setMembershipPrice(data.membershipPrice);
-                } else {
-                    throw new Error("Error al obtener los detalles de la membresía.");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                setError("Hubo un problema al obtener los detalles de la membresía.");
-            }
-        };
-
-        fetchMembershipDetails();
-    }, [token, show]);
 
     const handleChangePrice = (e) => {
         setMembershipPrice(e.target.value);
@@ -51,6 +25,10 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
     };
 
     const handleConfirmUpdate = async () => {
+        if (!token) {
+            console.log("Token no disponible al intentar actualizar");
+            return;
+        }
         const updatedMembership ={
             membershipPrice: membershipPrice,
             membershipTitle: membershipTitle,
@@ -76,6 +54,7 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
         }
         setShowConfirmModal(false);
     };
+
 
     return (
         <>

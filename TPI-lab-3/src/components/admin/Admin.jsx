@@ -17,7 +17,6 @@ const Admin = () => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showEditMembershipModal, setShowEditMembershipModal] = useState(false);
-    const [membershipInfo, setMembershipInfo] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
@@ -43,24 +42,6 @@ const Admin = () => {
         };
         fetchProducts();
     }, []);
-
-    const fetchMembershipInfo = async () => {
-        try {
-            const response = await fetch("https://localhost:7121/api/DateMembership/details", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-            if (!response.ok) {
-                throw new Error("Error al obtener la información de membresía");
-            }
-            const data = await response.json();
-            setMembershipInfo(data); 
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
 
     const placeholderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmNILEZppKJCs1LHgBaUGbbFzQJsv6b5bt-w&s";
 
@@ -109,7 +90,6 @@ const Admin = () => {
     };
 
     const handleEditMembershipClick = () => {
-        fetchMembershipInfo();
         setShowEditMembershipModal(true);
     };
 
@@ -179,7 +159,6 @@ const Admin = () => {
             <EditMembershipModal
                 show={showEditMembershipModal}
                 handleClose={() => setShowEditMembershipModal(false)}
-                membershipInfo={membershipInfo}
                 token={token}
             />
         </>
