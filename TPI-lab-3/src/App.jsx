@@ -7,7 +7,7 @@ import { AuthenticationProvider } from "./services/auth/Auth.context";
 
 // Custom components
 import Login from "./components/login/Login";
-import Register from "./components/register/Register"; // autocompleta minuscula
+import Register from "./components/register/Register";
 import NotFound from "./components/notFound/NotFound";
 import Protected from "./components/protected/Protected";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -20,6 +20,8 @@ import AddProduct from "./components/admin/AddProduct";
 import CardData from "./components/paymentMethod/CardData";
 import CreateUser from "./components/sysadmin/AddUser";
 import MyPurchases from "./components/myPurchases/MyPurchases";
+import Membership from "./components/membership/Membership";
+
 // Stlyes
 
 function App() {
@@ -61,7 +63,7 @@ function App() {
       ),
     },
     {
-      path: "/edit/:id",
+      path: "/edit/:productId",
       element: (
         <Protected allowedRoles={['Admin']}>
           <EditProduct />
@@ -85,6 +87,14 @@ function App() {
       ),
     },
     {
+      path: "/membership",
+      element: (
+        <Protected allowedRoles={['Client']}>
+          <Membership />
+        </Protected>
+      ),
+    },
+    {
       path: "/paymentmethod", 
       element: (
         <Protected allowedRoles={['Client']}>
@@ -93,18 +103,18 @@ function App() {
       ),
     },
     {
-      path: "/carddata", 
+      path: "/mypurchase", 
       element: (
         <Protected allowedRoles={['Client']}>
-          <CardData />
+          <MyPurchases />
         </Protected>
       ),
     },
     {
-      path: "/mypurchases", 
+      path: "/carddata", 
       element: (
         <Protected allowedRoles={['Client']}>
-          <MyPurchases />
+          <CardData />
         </Protected>
       ),
     },

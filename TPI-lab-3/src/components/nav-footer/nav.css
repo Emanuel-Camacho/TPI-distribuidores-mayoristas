@@ -79,3 +79,23 @@
 .logo-img {
     width: 120px;
 }
+
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+    background-color: lightgray;
+}
+
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode button {
+    background-color: #333; 
+    color: white;
+}

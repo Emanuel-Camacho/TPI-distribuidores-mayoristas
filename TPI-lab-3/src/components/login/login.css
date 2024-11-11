@@ -40,3 +40,10 @@ p a:hover {
     border-radius: 20px;
     background-color: rgb(169, 169, 169);
 }
+
+.dark-mode-toggle {
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

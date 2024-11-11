@@ -44,10 +44,21 @@ const Dashboard = () => {
     const handleCardClick = (productId) => {
         navigate(`/product/${productId}`);
     };
+    
+    const handleMembershipClick = () => {
+        navigate(`/membership`);
+    };
 
     return (
         <>
             <NavBar setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
+            <Button 
+                variant="success" 
+                onClick={handleMembershipClick}
+                className="my-3"
+                >
+                Adquirir una Membresia
+            </Button>
             <div className="card-list mt-5">
                 {filteredProducts.map((product) => (
                     <ProductCard

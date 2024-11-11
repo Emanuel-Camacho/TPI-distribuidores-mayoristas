@@ -8,6 +8,7 @@ import './Admin.css'
 import { useAuth } from "../../services/auth/Auth.context";
 import ConfirmDeleteProduct from "./ConfirmDeleteProduct";
 import EditProductModal from "./EditProductModal";
+import EditMembershipModal from "./EditMembershipModal";
 
 
 const Admin = () => {
@@ -15,6 +16,8 @@ const Admin = () => {
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [showEditMembershipModal, setShowEditMembershipModal] = useState(false);
+    const [membershipInfo, setMembershipInfo] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
@@ -40,6 +43,25 @@ const Admin = () => {
         };
         fetchProducts();
     }, []);
+
+    const fetchMembershipInfo = async () => {
+        try {
+            const response = await fetch("https://localhost:7121/api/DateMembership/details", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error("Error al obtener la información de membresía");
+            }
+            const data = await response.json();
+            setMembershipInfo(data); 
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
     const placeholderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmNILEZppKJCs1LHgBaUGbbFzQJsv6b5bt-w&s";
 
     const filteredProducts = products.filter((product) => {
@@ -85,10 +107,22 @@ const Admin = () => {
             console.error('Error en la solicitud:', error);
         }
     };
+
+    const handleEditMembershipClick = () => {
+        fetchMembershipInfo();
+        setShowEditMembershipModal(true);
+    };
+
     return (
         <>
             <NavAdmin setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
-            <h1 className="mt-3 mb-3">PAGINA ADMIN</h1>
+            <div className="d-flex justify-content-between align-items-center mt-3 mb-3">
+                <h1 className="mt-3 mb-3">PAGINA ADMIN</h1>
+                
+            </div>
+            <Button variant="primary" className="ms-auto" onClick={handleEditMembershipClick}>
+                    Editar Membresía
+            </Button>
             <div className="card-list">
                 <Card className="card-container new-product-card">
                     <Button variant="light" className="new-product-button" onClick={handleAddProduct}>
@@ -142,6 +176,12 @@ const Admin = () => {
                 )}
             </div>
             <FooterAdmin />
+            <EditMembershipModal
+                show={showEditMembershipModal}
+                handleClose={() => setShowEditMembershipModal(false)}
+                membershipInfo={membershipInfo}
+                token={token}
+            />
         </>
     );
 };

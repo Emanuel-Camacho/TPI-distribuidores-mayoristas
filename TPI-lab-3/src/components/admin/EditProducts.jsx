@@ -1,8 +1,6 @@
 import { useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
-import NavBar from "../nav-footer/nav";
-import Footer from "../nav-footer/footer";
 import EditProductModal from './EditProductModal';
 import FooterAdmin from './nav-footer-admin/FooterAdmin';
 import NavAdmin from './nav-footer-admin/NavAdmin';

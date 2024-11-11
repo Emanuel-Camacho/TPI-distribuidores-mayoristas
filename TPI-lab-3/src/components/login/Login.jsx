@@ -2,6 +2,7 @@ import { useRef, useState, useContext } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/auth/Auth.context";
+import useDarkMode from "../../custom/UseDarkMode";
 
 import './login.css'
 
@@ -18,10 +19,9 @@ const Login = ({ onLogin }) => {
     const { handleLogin } = useAuth();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    // referencian los inputs directamente
-
     const navigate = useNavigate();
-    // redirecciona al usuario a otras rutas
+    
+    const [isDarkMode, toggleDarkMode] = useDarkMode();
 
     const handleChangeEmail = (event) => {
         setEmail(event.target.value);
@@ -94,7 +94,7 @@ const Login = ({ onLogin }) => {
     }
 
     return (
-        <Row className="align-items-center min-vh-100 mx-0 w-50">
+        <Row className={`align-items-center min-vh-100 mx-0 w-50 ${isDarkMode ? "dark-mode" : ""}`}>
             <Col xs={12} md={5} className="text-center">
                 <a href="/">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1THseam-yBpdGJYlt60zc_zFR-vlRSHuiRw&s" alt="logo" className="logo-img mb-2 w-50" />
@@ -144,6 +144,15 @@ const Login = ({ onLogin }) => {
                     </Card.Body>
                 </Card>
             </Col>
+            <Button
+                variant="link"  
+                onClick={toggleDarkMode} 
+                className="ms-auto my-3"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-brilliance" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7"/>
+                </svg>
+            </Button>
         </Row>
     );
 };

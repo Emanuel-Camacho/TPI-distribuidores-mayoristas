@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import useDarkMode from "../../custom/UseDarkMode";
 
 import '../register/Register.css'
 
@@ -22,6 +23,8 @@ const Register = ({ onRegister }) => {
     const passwordRef = useRef(null);
     const passwordRepeatRef = useRef(null);
     const navigate = useNavigate();
+
+    const [isDarkMode, toggleDarkMode] = useDarkMode();
 
     const handleChangeUsername = (event) => {
         setUsername(event.target.value);
@@ -135,7 +138,7 @@ const Register = ({ onRegister }) => {
     };
 
     return (
-        <Row className="align-items-center min-vh-100 mx-0 w-50">
+        <Row className={`align-items-center min-vh-100 mx-0 w-50 ${isDarkMode ? "dark-mode" : ""}`}>
             <Col xs={12} md={5} className="text-center">
                 <a href="/">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1THseam-yBpdGJYlt60zc_zFR-vlRSHuiRw&s" alt="logo" className="logo-img mb-2 w-50" />
@@ -215,6 +218,15 @@ const Register = ({ onRegister }) => {
                     </Row>
                 </Card>
             </Col>
+            <Button
+                variant="link"  
+                onClick={toggleDarkMode} 
+                className="ms-auto my-3"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-brilliance" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7"/>
+                </svg>
+            </Button>
         </Row>
     );
 };
