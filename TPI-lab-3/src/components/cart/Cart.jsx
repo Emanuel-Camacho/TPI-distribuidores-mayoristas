@@ -144,6 +144,7 @@ const Cart = () => {
                             <Card.Body>
                                 <Card.Title>Carrito</Card.Title>
                                 <Row className="my-3">
+                                    {/*aca iria el condicional (si esta en la lista muestra el dsc y el total actualizado?*/}
                                     <Col>Total</Col>
                                     <Col className="text-end">
                                         <strong>${(totalPrice).toFixed(2)}</strong>

@@ -4,10 +4,9 @@ import { Modal, Button, Form } from "react-bootstrap";
 const EditMembershipModal = ({ show, handleClose, token }) => {
     const [membershipTitle, setMembershipTitle] = useState("Membresia");
     const [membershipDescription, setMembershipDescription] = useState("Descripcion");
-    const [membershipPrice, setMembershipPrice] = useState(50000);
+    const [membershipPrice, setMembershipPrice] = useState(1);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [loading, setLoading] = useState(true);
-
+    const [membershipId, setMembershipId] = useState(1); 
 
     const handleChangePrice = (e) => {
         setMembershipPrice(e.target.value);
@@ -30,6 +29,7 @@ const EditMembershipModal = ({ show, handleClose, token }) => {
             return;
         }
         const updatedMembership ={
+            membershipId: membershipId,
             membershipPrice: membershipPrice,
             membershipTitle: membershipTitle,
             membershipDescription: membershipDescription,

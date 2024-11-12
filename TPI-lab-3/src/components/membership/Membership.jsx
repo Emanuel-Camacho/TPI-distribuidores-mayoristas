@@ -19,11 +19,38 @@ const Membership = () => {
     const [cvv, setCvv] = useState("");
     const [dni, setDni] = useState("");
     const [selectedOption, setSelectedOption] = useState("creditCard");
+    var userid;
 
     const [membershipTitle, setMembershipTitle] = useState("");
     const [membershipDescription, setMembershipDescription] = useState("");
     const [membershipPrice, setMembershipPrice] = useState(0);
 
+    //membership userId
+    /* useEffect(() => {
+        const fetchMemberId = async () => {
+            try {
+                const response = await fetch(`https://localhost:7121/api/Membership/getUserId?number=${user.id}`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    userid = data;
+                } else {
+                    throw new Error("Error al obtener los detalles de la membresía.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un problema al obtener los detalles de la membresía.");
+            }
+        };
+
+        fetchMemberId();
+    },); */
+
+    //membership details
     useEffect(() => {
         const fetchMembershipDetails = async () => {
             try {
@@ -118,6 +145,9 @@ const Membership = () => {
     const handleCancelClick = () => {
         setShowPaymentForm(false); 
     };
+    const handleBack =()=>{
+        navigate('/dashboard');
+    }
 
     return (
         <>
@@ -132,14 +162,15 @@ const Membership = () => {
                     </Card.Text>
                     <Row className="align-items-center">
                         <Col xs={12} md={6} className="mb-3 mb-md-0">
+                        {!userid && 
                             <Button
                                 variant="primary"
                                 size="lg"
-                                className="w-100"
+                                className="w-75"
                                 onClick={handleSubscribeClick}
                             >
                                 Suscribirse
-                            </Button>
+                            </Button>}                            
                         </Col>
                         <Col xs={12} md={6} className="text-md-end">
                             <span className="fw-bold" style={{ fontSize: "1.5rem" }}>
@@ -149,9 +180,14 @@ const Membership = () => {
                     </Row>
                     <Row className="mt-4">
                         <Col className="text-center">
+                        <div className="d-flex justify-content-between mt-3">
+                        <Button variant='secondary' className='mt-3' onClick={handleBack}>Volver</Button>
+                        {userid &&
                             <Button variant="danger" onClick={() => setShowUnsubscribeModal(true)}>
                                 Cancelar Membresía
                             </Button>
+                        }
+                        </div>
                         </Col>
                     </Row>
                 </Card.Body>

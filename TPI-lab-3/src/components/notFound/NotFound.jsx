@@ -8,11 +8,22 @@ const NotFound = () => {
         navigate("/login");
     };
     return (
-        <div className="text-center mt-3">
-            <h2> ¡Ups! La página solicitada no fue encontrada</h2>
-            <Button className="text-center" onClick={goBackLoginHandler}>
-                Volver a iniciar sesión
-            </Button>
+        <div className="text-center mt-5">
+            <h2 className="mb-5">La página que intentas buscar no existe.</h2>
+            <div className="d-flex justify-content-center align-items-center gap-3 mt-5 py-4 ">
+                <img 
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1THseam-yBpdGJYlt60zc_zFR-vlRSHuiRw&s" 
+                    alt="Not found"
+                    style={{ maxWidth: "150px", width: "100%" }}
+                />
+                <Button 
+                    variant="primary" 
+                    className="px-3 py-3 fw-bold" 
+                    onClick={goBackLoginHandler}
+                >
+                    Volver a iniciar sesión
+                </Button>
+            </div>
         </div>
     );
 };
