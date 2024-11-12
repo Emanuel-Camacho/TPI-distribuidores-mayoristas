@@ -1,9 +1,11 @@
 import { createContext, useState, useContext, useEffect } from "react";
 export const AuthenticationContext = createContext();
+import { useCart } from '../../context/CartContext';
 
 export const AuthenticationProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem("authToken"));
+    const { clearCart } = useCart();
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -21,6 +23,7 @@ export const AuthenticationProvider = ({ children }) => {
     };
 
     const handleLogout = () => {
+        clearCart();
         setUser(null);
         setToken(null);
         localStorage.removeItem("authToken");

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
@@ -21,11 +21,18 @@ export const CartProvider = ({ children }) => {
 
     const removeFromCart = (productId) => {
         setCartItems((prevItems) => prevItems.filter((item) => item.productId !== productId));
+    };
 
+    const clearCart = () => {
+        setCartItems([]);
+        localStorage.removeItem("carrito");
+        localStorage.removeItem("quantities");
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("ticket");
     };
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
             {children}
         </CartContext.Provider>
     );

@@ -8,7 +8,6 @@ import Footer from '../nav-footer/footer';
 
 const Cart = () => {
     const { cartItems, removeFromCart } = useCart();
-    const shippingCost = 5000;
     const navigate = useNavigate();
 
     const [quantities, setQuantities] = useState(() => {
@@ -24,6 +23,16 @@ const Cart = () => {
         if (cartItems.length === 0) {
             alert("Tu carrito está vacío. Por favor, añade productos antes de proceder a la compra.");
         } else {
+            const ticket = {
+                items: cartItems.map(item => ({
+                    productName: item.productName,
+                    unitPrice: item.unitPrice,
+                    quantity: quantities[item.productId],
+                    subtotalTicket: (item.productPrice * quantities[item.productId]).toFixed(2)
+                })),
+                total: totalPrice.toFixed(2)
+            };
+            localStorage.setItem('cartItems', JSON.stringify(ticket));
             navigate("/paymentmethod");
         }
     };
@@ -47,7 +56,7 @@ const Cart = () => {
         setQuantities((prevQuantities) => {
             const newQuantities = { ...prevQuantities };
             delete newQuantities[productId];
-            localStorage.setItem('quantities', JSON.stringify(newQuantities)); // Actualiza localStorage
+            localStorage.setItem('quantities', JSON.stringify(newQuantities));
             return newQuantities;
         });
     };

@@ -162,15 +162,15 @@ const Membership = () => {
                     </Card.Text>
                     <Row className="align-items-center">
                         <Col xs={12} md={6} className="mb-3 mb-md-0">
-                        {!userid && 
-                            <Button
+                        <Button
                                 variant="primary"
                                 size="lg"
                                 className="w-75"
                                 onClick={handleSubscribeClick}
                             >
                                 Suscribirse
-                            </Button>}                            
+                            </Button> 
+                        {/* {!userid && } */}
                         </Col>
                         <Col xs={12} md={6} className="text-md-end">
                             <span className="fw-bold" style={{ fontSize: "1.5rem" }}>
@@ -182,11 +182,10 @@ const Membership = () => {
                         <Col className="text-center">
                         <div className="d-flex justify-content-between mt-3">
                         <Button variant='secondary' className='mt-3' onClick={handleBack}>Volver</Button>
-                        {userid &&
-                            <Button variant="danger" onClick={() => setShowUnsubscribeModal(true)}>
+                        <Button variant="danger" onClick={() => setShowUnsubscribeModal(true)}>
                                 Cancelar Membresía
                             </Button>
-                        }
+                        {/* {userid &&} */}
                         </div>
                         </Col>
                     </Row>
