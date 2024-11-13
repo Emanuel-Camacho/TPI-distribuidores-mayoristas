@@ -21,6 +21,7 @@ import CardData from "./components/paymentMethod/CardData";
 import CreateUser from "./components/sysadmin/AddUser";
 import MyPurchases from "./components/myPurchases/MyPurchases";
 import Membership from "./components/membership/Membership";
+import LandingPage from "./components/landing/Landing";
 
 // Stlyes
 
@@ -28,7 +29,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Navigate to="/login" />,
+      element: <LandingPage/> ,
     },
     {
       path: "/dashboard",
