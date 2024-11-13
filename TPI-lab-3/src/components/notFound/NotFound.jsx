@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 const NotFound = () => {
     const navigate = useNavigate();
 
-    const goBackLoginHandler = () => {
-        navigate("/login");
+    const goBackHandler = () => {
+        navigate("/");
     };
     return (
         <div className="text-center mt-5">
@@ -17,11 +17,11 @@ const NotFound = () => {
                     style={{ maxWidth: "150px", width: "100%" }}
                 />
                 <Button 
-                    variant="primary" 
+                    variant="secondary" 
                     className="px-3 py-3 fw-bold" 
-                    onClick={goBackLoginHandler}
+                    onClick={goBackHandler}
                 >
-                    Volver a iniciar sesión
+                    Volver al inicio
                 </Button>
             </div>
         </div>

@@ -29,7 +29,7 @@ const LandingPage = () => {
             <Row className="w-100">
                 <Col md={12} className="mb-4">
                     <Image 
-                        src="https://cdn.discordapp.com/attachments/1230880736777736363/1302353991325188189/images-removebg-preview.png?ex=6734556c&is=673303ec&hm=2679bad7ba4cb69156116eaaddc91673ea2f9d647cb7c59750c1473c9c2da750&" 
+                        src="https://cdn.discordapp.com/attachments/1230880736777736363/1302353991325188189/images-removebg-preview.png?ex=6735a6ec&is=6734556c&hm=455c61881b321c961781d74280fbc0855ee9b46e6e0ef8e74fc04dc64359745c&"
                         alt="Todo al por mayor" 
                         fluid 
                         width="150" 
