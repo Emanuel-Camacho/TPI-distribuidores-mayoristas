@@ -5,10 +5,16 @@ import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../nav-footer/nav';
 import Footer from '../nav-footer/footer';
+import { useAuth } from "../../services/auth/Auth.context";
+
 
 const Cart = () => {
     const { cartItems, removeFromCart } = useCart();
     const navigate = useNavigate();
+    const { token } = useAuth();
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const userId = userData?.id; 
+    const [isMember, setIsMember] = useState(false);
 
     const [quantities, setQuantities] = useState(() => {
         const savedQuantities = localStorage.getItem('quantities');
@@ -60,6 +66,31 @@ const Cart = () => {
             return newQuantities;
         });
     };
+
+    useEffect(() => {
+        const fetchMemberId = async () => {
+            try {
+                const response = await fetch(`https://localhost:7121/api/Membership/getUserId?number=${userId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setIsMember(data);
+                } else {
+                    throw new Error("Error al obtener los detalles de la membresía.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un problema al obtener los detalles de la membresía.");
+            }
+        };
+        fetchMemberId();
+    },[userId, token]);
+
 
     useEffect(() => {
         setQuantities((prevQuantities) => {
@@ -159,7 +190,22 @@ const Cart = () => {
                                         <strong>${(totalPrice).toFixed(2)}</strong>
                                     </Col>
                                 </Row>
-                                <Button variant="warning" className="w-100 mt-5" onClick={handlePaymentMethod}>Comprar</Button>
+                                {isMember !== 0 && (
+                                    <>
+                                        <Row className="my-3">
+                                            <Col className="text-white">20% de descuento por ser miembro</Col>
+                                        </Row>
+                                        <Row className="my-3">
+                                            <Col>Precio con descuento</Col>
+                                            <Col className="text-end">
+                                                <strong>${(totalPrice * 0.8).toFixed(2)}</strong>
+                                            </Col>
+                                        </Row>
+                                    </>
+                                )}
+                                <Button variant="warning" className="w-100 mt-5" onClick={handlePaymentMethod}>
+                                    Comprar
+                                </Button>
                             </Card.Body>
                         </Card>
                     </Col>
